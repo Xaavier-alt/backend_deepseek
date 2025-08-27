@@ -2,19 +2,19 @@
   {
     "title": "FURIOSA: A Mad-Max Saga (UNRELEASED)",
     "description": "Embark on a scorching odyssey of vengeance across a savage wasteland in this vehicular combat masterpiece.",
-    "image": "images/FURIOSAoverlay main.png",
+    "image": "/images/FURIOSAoverlay main.png",
     "link": "#"
   },
   {
     "title": "JOHN WICK (coming soon...)",
     "description": "Live the story of a secret assassin on a relentless crusade through the assassin underworld in this brutally elegant and intense action-packed gameplay.",
-    "image": "images/JOHNWICKoverlay main.png",
+    "image": "/images/JOHNWICKoverlay main.png",
     "link": "#"
   },
   {
     "title": "THE STAR WARS (coming soon...)",
     "description": "Experience hyper-realistic journey on a galactic odyssey to become a Jedi and restore balance to the galaxy in this legendary space adventure game with next-gen graphics and physics.",
-    "image": "images/STARWARSoverlay unreal.png",
+    "image": "/images/STARWARSoverlay unreal.png",
     "link": "#"
   }
 ]

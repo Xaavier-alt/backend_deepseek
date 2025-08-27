@@ -2,15 +2,18 @@ require("dns").setDefaultResultOrder("ipv4first");
 require("dotenv").config(); // load .env variables
 
 const express = require("express");
+const app = express();
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const cors = require("cors");
 const path = require("path");
 
-const app = express();
 const PORT = process.env.PORT || 5000;
+const NODE_ENV = process.env.NODE_ENV || "development";
 
 // ===== Middleware =====
-const allowedOrigins = process.env.FRONTEND_URLS.split(","); // comma-separated list in .env
+const allowedOrigins = process.env.FRONTEND_URLS
+  ? process.env.FRONTEND_URLS.split(",")
+  : [];
 
 const corsOptions = {
   origin: (origin, callback) => {
@@ -22,8 +25,10 @@ const corsOptions = {
     }
   },
 };
+
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 // ===== MongoDB Atlas Connection =====
 const uri = process.env.MONGODB_URI; // get from .env
@@ -33,7 +38,7 @@ const client = new MongoClient(uri, {
     version: ServerApiVersion.v1,
     strict: true,
     deprecationErrors: true,
-  }
+  },
 });
 
 let db, playersCollection;
@@ -51,13 +56,9 @@ async function connectDB() {
 }
 connectDB();
 
-// ===== Routes =====
-app.get("/", (req, res) => {
-  res.send("🚀 XGI Backend is live with MongoDB Atlas + Express routes!");
-});
-
+// ===== API Routes =====
 // Player Routes
-app.post("/player", async (req, res) => {
+app.post("/api/player", async (req, res) => {
   try {
     const player = req.body;
     const result = await playersCollection.insertOne(player);
@@ -67,7 +68,7 @@ app.post("/player", async (req, res) => {
   }
 });
 
-app.get("/players", async (req, res) => {
+app.get("/api/players", async (req, res) => {
   try {
     const players = await playersCollection.find().toArray();
     res.json(players);
@@ -83,7 +84,22 @@ const techRoutes = require("./routes/technology");
 app.use("/api/games", gameRoutes);
 app.use("/api/technology", techRoutes);
 
+// ===== Serve Frontend (Production) =====
+const frontendPath = path.join(__dirname, "public");
+app.use(express.static(frontendPath));
+
+// Fallback for SPA routing: serve index.html for all non-API routes
+app.get("*", (req, res) => {
+  if (req.path.startsWith("/api")) {
+    res.status(404).json({ error: "API route not found" });
+  } else {
+    res.sendFile(path.join(frontendPath, "index.html"));
+  }
+});
+
 // ===== Start Server =====
 app.listen(PORT, () => {
-  console.log(`🚀 XGI backend running on http://localhost:${PORT}`);
+  console.log(
+    `🚀 XGI fullstack running in ${NODE_ENV} mode at http://localhost:${PORT}`
+  );
 });
