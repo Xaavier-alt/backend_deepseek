@@ -1,7 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
 
- const API_BASE = "https://xylexgaminginc.onrender.com";
-
+    // -----------------------
+    // Auto-detect API base
+    // -----------------------
+    const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+    const API_BASE = isLocal
+        ? "http://localhost:5000"   // <-- local backend
+        : "https://xylexgaminginc.onrender.com"; // <-- production backend
 
     // -----------------------
     // Fetch and render games
@@ -24,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Dynamically add image (point to backend)
                 const img = document.createElement('img');
-                img.src = `${API_BASE}/${game.image}`;  // FIXED
+                img.src = `${API_BASE}/${game.image}`;
                 img.alt = game.title;
                 imgContainer.appendChild(img);
 
