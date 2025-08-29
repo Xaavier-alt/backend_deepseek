@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const API_BASE = "https://backend-deepseek-jpwd.onrender.com";
+ const API_BASE = "https://xylexgaminginc.onrender.com";
+
 
     // -----------------------
     // Fetch and render games
