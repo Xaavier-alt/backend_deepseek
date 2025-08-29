@@ -17,6 +17,9 @@
   ],
   "author": "Xylex Gaming Inc",
   "license": "MIT",
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
