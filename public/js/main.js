@@ -1,167 +1,147 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // -----------------------
-  // Config
-  // -----------------------
-  const isLocal = ["localhost", "127.0.0.1"].includes(window.location.hostname);
-  const API_BASE = isLocal ? "http://localhost:5000" : window.location.origin;
+document.addEventListener('DOMContentLoaded', () => {
 
-  // -----------------------
-  // Helpers
-  // -----------------------
-  const $ = (sel, root = document) => root.querySelector(sel);
-  const setHTML = (el, html) => (el.innerHTML = html);
+    // -----------------------
+    // Auto-detect API base
+    // -----------------------
+    const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+    const API_BASE = isLocal
+        ? "http://localhost:5000"   // <-- local backend
+        : "https://xylexgaminginc.onrender.com"; // <-- production backend
 
-  const showLoading = (el) =>
-    setHTML(el, '<div class="loading-spinner" role="status"></div>');
-
-  const friendlyError = (el, msg = "Something went wrong") =>
-    setHTML(el, `<p class="error-message" role="alert">${msg}</p>`);
-
-  const debounce = (fn, delay = 300) => {
-    let timeout;
-    return (...args) => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => fn(...args), delay);
-    };
-  };
-
-  // -----------------------
-  // Fetch helper
-  // -----------------------
-  async function fetchJSON(url) {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return res.json();
-  }
-
-  // -----------------------
-  // Loaders
-  // -----------------------
-  async function loadGames({ targetEl, search = "" } = {}) {
-    const grid = targetEl;
-    showLoading(grid);
-    try {
-      const qs = search ? `?search=${encodeURIComponent(search)}` : "";
-      const games = await fetchJSON(`${API_BASE}/api/games${qs}`);
-      setHTML(grid, "");
-      if (!games.length) {
-        setHTML(grid, `<p class="error-message">No games match your search.</p>`);
-        return;
-      }
-      for (const g of games) {
-        const card = document.createElement("div");
-        card.className = "game-card";
-        card.innerHTML = `
-          <div class="game-img"><img src="${API_BASE}${g.image}" alt="${g.title} cover"></div>
-          <div class="game-content">
-            <h3>${g.title}</h3>
-            <p>${g.description}</p>
-          </div>`;
-        grid.appendChild(card);
-      }
-    } catch (err) {
-      console.error(err);
-      friendlyError(grid, "Failed to load games.");
+    // -----------------------
+    // Loading indicator functions (ADD THIS NEW SECTION)
+    // -----------------------
+    function showLoading(element) {
+        element.innerHTML = '<div class="loading-spinner"></div>';
     }
-  }
-
-  async function loadTechnology({ targetEl, search = "" } = {}) {
-    const container = targetEl;
-    showLoading(container);
-    try {
-      const qs = search ? `?search=${encodeURIComponent(search)}` : "";
-      const techs = await fetchJSON(`${API_BASE}/api/technology${qs}`);
-      setHTML(container, "");
-      if (!techs.length) {
-        setHTML(container, `<p class="error-message">No technology matches your search.</p>`);
-        return;
-      }
-      for (const t of techs) {
-        const card = document.createElement("div");
-        card.className = "tech-card";
-        card.innerHTML = `
-          <div class="tech-icon"><i class="${t.icon}" aria-hidden="true"></i></div>
-          <h3>${t.name}</h3>
-          <p>${t.description}</p>`;
-        container.appendChild(card);
-      }
-    } catch (err) {
-      console.error(err);
-      friendlyError(container, "Failed to load technology.");
+    
+    function hideLoading(element) {
+        element.innerHTML = '';
     }
-  }
 
-  // -----------------------
-  // Router
-  // -----------------------
-  const views = {
-    "/": $("#view-home"),
-    "/games": $("#view-games"),
-    "/technology": $("#view-technology"),
-  };
+    // -----------------------
+    // Fetch and render games (MODIFY THIS EXISTING FUNCTION)
+    // -----------------------
+    async function loadGames() {
+        const gameGrid = document.querySelector('.game-grid');
+        showLoading(gameGrid); // ADD THIS LINE
+        
+        try {
+            const res = await fetch(`${API_BASE}/api/games`);
+            // Add error handling for HTTP errors
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+            
+            const games = await res.json();
+            gameGrid.innerHTML = ""; // clear before rendering
 
-  function parseHash() {
-    const hash = window.location.hash || "#/";
-    const [path, qs] = hash.slice(1).split("?");
-    return {
-      path: path || "/",
-      params: new URLSearchParams(qs || ""),
-    };
-  }
+            games.forEach(game => {
+                const card = document.createElement('div');
+                card.classList.add('game-card');
 
-  async function router() {
-    const { path, params } = parseHash();
-    Object.values(views).forEach((v) => v && (v.hidden = true));
-    const view = views[path];
-    if (!view) return;
+                // Create image container
+                const imgContainer = document.createElement('div');
+                imgContainer.classList.add('game-img');
 
-    view.hidden = false;
+                // Dynamically add image (point to backend)
+                const img = document.createElement('img');
+                img.src = `${API_BASE}/${game.image}`;
+                img.alt = game.title;
+                imgContainer.appendChild(img);
 
-    if (path === "/games") {
-      await loadGames({ targetEl: $("#games-grid"), search: params.get("search") || "" });
+                // Create content container
+                const content = document.createElement('div');
+                content.classList.add('game-content');
+                content.innerHTML = `
+                    <h3>${game.title}</h3>
+                    <p>${game.description}</p>
+                    <a href="${game.link}" class="btn btn-outline">Learn More</a>
+                `;
+
+                // Append image and content to card
+                card.appendChild(imgContainer);
+                card.appendChild(content);
+
+                // Append card to grid
+                gameGrid.appendChild(card);
+            });
+        } catch (err) {
+            // MODIFY THIS ERROR HANDLING
+            gameGrid.innerHTML = '<p class="error-message">Failed to load games. Please try again later.</p>';
+            console.error("Error loading games:", err);
+        }
     }
-    if (path === "/technology") {
-      await loadTechnology({ targetEl: $("#tech-container"), search: params.get("search") || "" });
+
+    // -----------------------
+    // Fetch and render technology (MODIFY THIS EXISTING FUNCTION)
+    // -----------------------
+    async function loadTechnology() {
+        const techContainer = document.querySelector('.tech-container');
+        showLoading(techContainer); // ADD THIS LINE
+        
+        try {
+            const res = await fetch(`${API_BASE}/api/technology`);
+            // Add error handling for HTTP errors
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+            
+            const techList = await res.json();
+            techContainer.innerHTML = "";
+
+            techList.forEach(tech => {
+                const card = document.createElement('div');
+                card.classList.add('tech-card');
+                card.innerHTML = `
+                    <div class="tech-icon"><i class="${tech.icon}"></i></div>
+                    <h3>${tech.title}</h3>
+                    <p>${tech.description}</p>`;
+                techContainer.appendChild(card);
+            });
+        } catch (err) {
+            // MODIFY THIS ERROR HANDLING
+            techContainer.innerHTML = '<p class="error-message">Failed to load technology. Please try again later.</p>';
+            console.error("Error loading technology:", err);
+        }
     }
-  }
 
-  window.addEventListener("hashchange", router);
+    // Call both loaders
+    loadGames();
+    loadTechnology();
 
-  // -----------------------
-  // Search inputs
-  // -----------------------
-  const gameSearch = $("#search-input");
-  const techSearch = $("#tech-search-input");
+    // -----------------------
+    // Animate elements when they scroll into view
+    // -----------------------
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
 
-  if (gameSearch) {
-    gameSearch.addEventListener(
-      "input",
-      debounce((e) => {
-        const value = e.target.value.trim();
-        const base = "#/games";
-        const next = value ? `${base}?search=${encodeURIComponent(value)}` : base;
-        history.replaceState(null, "", next); // FIX: prevents reload wiping input
-        router(); // reload view manually
-      }, 400)
-    );
-  }
+    document.querySelectorAll('.game-card, .tech-card').forEach(card => {
+        card.style.opacity = 0;
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(card);
+    });
 
-  if (techSearch) {
-    techSearch.addEventListener(
-      "input",
-      debounce((e) => {
-        const value = e.target.value.trim();
-        const base = "#/technology";
-        const next = value ? `${base}?search=${encodeURIComponent(value)}` : base;
-        history.replaceState(null, "", next); // FIX: prevents reload wiping input
-        router(); // reload view manually
-      }, 400)
-    );
-  }
+    // -----------------------
+    // Header scroll effect
+    // -----------------------
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.style.backgroundColor = 'rgba(18, 18, 18, 0.95)';
+            header.style.padding = '10px 0';
+        } else {
+            header.style.backgroundColor = 'rgba(18, 18, 18, 0.9)';
+            header.style.padding = '15px 0';
+        }
+    });
 
-  // -----------------------
-  // Init
-  // -----------------------
-  if (!window.location.hash) window.location.hash = "#/";
-  router();
 });
+

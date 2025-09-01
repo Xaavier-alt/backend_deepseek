@@ -1,256 +1,536 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Xylex Gaming | XGI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xylex Gaming | XGI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #121212;
+            --secondary: #1a1a1a;
+            --accent: #35df36;
+            --accent-light: #35df36;
+            --accent-dark:#11b10f;
+            --text: #ffffff;
+            --text-secondary: #b3b3b3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+      header {
+            background-color: rgba(18, 18, 18, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0 20px;   /* horizontal spacing only */
+            height: 100px;     /* lock header height */
+            display: flex;
+            align-items: center; /* keeps logo/nav centered */
+            }
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet"/>
+    /* Header content */
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo img {
+            max-height: 100px;
+            width: auto;
+            display: block;
+        }
 
-  <style>
-    :root{
-      --primary:#121212;--secondary:#1a1a1a;--accent:#35df36;--accent-light:#35df36;--accent-dark:#11b10f;--text:#fff;--text-secondary:#b3b3b3;
-    }
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Montserrat',sans-serif;background:var(--primary);color:var(--text);line-height:1.6;overflow-x:hidden}
-    h1,h2,h3,h4{font-family:'Orbitron',sans-serif;font-weight:700;letter-spacing:.5px}
-    .container{width:100%;max-width:1400px;margin:0 auto;padding:0 20px}
-    header{background:rgba(18,18,18,.9);backdrop-filter:blur(10px);position:fixed;top:0;left:0;width:100%;z-index:1000;border-bottom:1px solid rgba(255,255,255,.1);padding:0 20px;height:100px;display:flex;align-items:center}
-    .header-content{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:1200px;margin:0 auto}
-    .logo{display:flex;align-items:center;gap:10px}
-    .logo img{max-height:100px;width:auto;display:block}
-    .logo a{display:inline-block;text-decoration:none}
-    nav ul{display:flex;list-style:none;gap:22px;align-items:center}
-    nav a{color:var(--text);text-decoration:none;font-weight:600;font-size:15px;transition:color .3s}
-    nav a:hover{color:var(--accent-light)}
-    .nav-buttons{display:flex;gap:10px}
-    .btn{padding:10px 16px;border-radius:8px;font-weight:700;text-decoration:none;transition:all .25s;font-size:14px;cursor:pointer;border:none}
-    .btn-outline{border:1px solid var(--accent);color:var(--accent);background:transparent}
-    .btn-outline:hover{background:var(--accent);color:var(--text)}
-    .btn-primary{background:var(--accent);color:var(--text)}
-    .btn-primary:hover{background:var(--accent-light)}
-    .chip{display:inline-block;padding:6px 10px;border:1px solid rgba(255,255,255,.15);border-radius:999px;font-size:12px;color:var(--text-secondary)}
-    .loading-spinner{border:4px solid #f3f3f3;border-top:4px solid var(--accent);border-radius:50%;width:40px;height:40px;animation:spin 1s linear infinite;margin:2rem auto}
-    @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-    .error-message{text-align:center;color:#ff6b6b;padding:2rem}
-    .visually-hidden{position:absolute !important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
-    /* Sections as views */
-    main{padding-top:110px}
-    section.view[hidden]{display:none !important}
-    /* Hero */
-    .hero{min-height:70vh;display:flex;align-items:center;background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;padding:80px 0 60px;position:relative}
-    .hero-content{max-width:800px;text-align:center;margin:0 auto}
-    .hero h1{font-size:3.2rem;margin-bottom:18px;line-height:1.2}
-    .hero p{font-size:1.1rem;color:var(--text-secondary);margin-bottom:28px;max-width:620px;margin-left:auto;margin-right:auto}
-    .hero-buttons{display:flex;gap:14px;justify-content:center;margin-top:18px;flex-wrap:wrap}
-    /* Cards */
-    .section-title{text-align:center;margin:18px 0 34px;font-size:2.2rem}
-    .games,.technology,.leaderboard,.signin{padding:38px 0;background:var(--secondary)}
-    .technology{background:var(--primary)}
-    .game-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-    .game-card{background:linear-gradient(145deg,#1a1a1a,#222);border-radius:14px;overflow:hidden;transition:transform .25s;box-shadow:0 10px 20px rgba(0,0,0,.3)}
-    .game-card:hover{transform:translateY(-6px)}
-    .game-img{width:100%;height:auto;overflow:hidden}
-    .game-img img{width:100%;height:auto;display:block;object-fit:contain}
-    .game-content{padding:16px}
-    .game-content h3{font-size:1.25rem;margin-bottom:8px}
-    .game-content p{color:var(--text-secondary);margin-bottom:12px;font-size:.95rem}
-    .tech-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-    .tech-card{background:var(--secondary);padding:24px;border-radius:14px;text-align:center;box-shadow:0 10px 20px rgba(0,0,0,.2)}
-    .tech-icon{font-size:2.2rem;color:var(--accent);margin-bottom:10px}
-    /* Search */
-    .searchbar{display:flex;gap:10px;align-items:center;margin:0 auto 16px;max-width:520px}
-    .searchbar input{flex:1;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:#0f0f0f;color:#fff}
-    /* Forms */
-    form.inline{display:flex;gap:10px;flex-wrap:wrap}
-    input[type="text"],input[type="email"]{padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:#0f0f0f;color:#fff}
-    /* Leaderboard */
-    #leaderboard-list{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-top:10px}
-    #leaderboard-list li{background:#191919;border:1px solid rgba(255,255,255,.08);padding:12px;border-radius:10px}
-    /* Modal */
-    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:20px;z-index:2000}
-    .modal{background:#161616;border:1px solid rgba(255,255,255,.12);border-radius:16px;max-width:820px;width:100%;max-height:85vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.6)}
-    .modal header{position:sticky;top:0;background:#121212;border-bottom:1px solid rgba(255,255,255,.08);height:auto;padding:12px 16px}
-    .modal .content{padding:16px}
-    .close-btn{background:transparent;border:none;color:#fff;font-size:20px;cursor:pointer}
-    /* Footer */
-    footer{background:#0a0a0a;padding:40px 0 28px}
-    .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px;margin-bottom:24px}
-    .footer-column h3{font-size:1.05rem;margin-bottom:10px;color:var(--accent-light)}
-    .footer-column ul{list-style:none}
-    .footer-column ul li{margin-bottom:8px}
-    .footer-column a{color:var(--text-secondary);text-decoration:none;transition:color .3s}
-    .footer-column a:hover{color:var(--accent-light)}
-    .social-links{display:flex;gap:10px;margin-top:10px}
-    .social-links a{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;background:var(--secondary);border-radius:50%;color:var(--text);transition:all .25s}
-    .social-links a:hover{background:var(--accent);transform:translateY(-2px)}
-    .copyright{text-align:center;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);color:var(--text-secondary);font-size:.9rem}
-    /* Light mode */
-    .light-mode{--primary:#f5f5f5;--secondary:#ffffff;--text:#333;--text-secondary:#555}
-    /* Responsive */
-    @media (max-width: 768px){.hero h1{font-size:2.2rem}.hero{min-height:60vh}}
-  </style>
+        .logo-short {
+            display: none;
+        }
+        
+        .logo a {
+              display: inline-block;
+              text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--accent-light);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .btn-outline {
+            border: 1px solid var(--accent);
+            color: var(--accent);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--accent);
+            color: var(--text);
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--text);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--accent-light);
+        }
+
+        .loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--accent);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-message {
+  text-align: center;
+  color: #ff6b6b;
+  padding: 2rem;
+}
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+            padding: 100px 0 60px;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        /* Featured Games */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+        }
+        
+        .section-title span {
+            color: var(--accent);
+        }
+        
+        .games {
+            padding: 100px 0;
+            background-color: var(--secondary);
+        }
+        
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .game-card {
+            background: linear-gradient(145deg, #1a1a1a, #222);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+        }
+        
+       .game-img {
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            border-radius: 8px; /* keep same look */
+        }
+
+        .game-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain; /* ensures full image is shown */
+        }
+
+        
+        .game-content {
+            padding: 20px;
+        }
+        
+        .game-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .game-content p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+        
+        /* Technology */
+        .technology {
+            padding: 100px 0;
+            background-color: var(--primary);
+        }
+        
+        .tech-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+        }
+        
+        .tech-card {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            background-color: var(--secondary);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tech-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        .tech-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #0a0a0a;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--accent-light);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--accent-light);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            color: var(--text);
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .logo-full {
+                display: none;
+            }
+            
+            .logo-short {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Header / Nav -->
-  <header>
-    <div class="container header-content" role="navigation" aria-label="Main navigation">
-      <div class="logo">
-        <a href="#/" aria-label="Xylex Gaming Home">
-          <img src="images/Xylex logo main.png" alt="Xylex Gaming Logo" />
-        </a>
-      </div>
-
-      <nav>
-        <ul>
-          <li><a href="#/" aria-current="page">Home</a></li>
-          <li><a href="#/games">Games</a></li>
-          <li><a href="#/technology">Technology</a></li>
-          <li><a href="#/leaderboard">Leaderboard</a></li>
-          <li><a href="#/sign-in">Sign In</a></li>
-        </ul>
-      </nav>
-
-      <div class="nav-buttons">
-        <button id="theme-toggle" class="btn btn-outline" aria-pressed="false" aria-label="Toggle theme">Toggle Theme</button>
-        <a href="#" class="btn btn-primary" aria-label="Download client">Download</a>
-      </div>
-    </div>
-  </header>
-
-  <main id="app" class="container" tabindex="-1">
-    <!-- HOME VIEW -->
-    <section id="view-home" class="view" aria-labelledby="home-title">
-      <section class="hero" role="banner">
+    <!-- Header -->
+    <header>
         <div class="container">
-          <div class="hero-content">
-            <p class="chip" aria-hidden="true">XGI</p>
-            <h1 id="home-title">THE NEXT GENERATION OF <span style="color: var(--accent-light);">GAMING</span></h1>
-            <p>Xylex Gaming pushes boundaries with cutting-edge tech and unforgettable experiences.</p>
-            <div class="hero-buttons">
-              <a href="#/games" class="btn btn-primary">Explore Games</a>
-              <a href="#/technology" class="btn btn-outline">Learn Technology</a>
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">   
+                        <img src="images/Xylex logo main.png" alt="Xylex Gaming Logo">   
+                </a>
+        </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Games</a></li>
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Jobs</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </nav>
+                <div class="nav-buttons">
+                    <a href="#" class="btn btn-outline">Sign In</a>
+                    <a href="#" class="btn btn-primary">Download</a>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
+    </header>
 
-      <section class="games" aria-labelledby="featured-title">
-        <h2 id="featured-title" class="section-title">FEATURED <span>GAMES</span></h2>
-        <div class="game-grid" id="home-game-grid" aria-live="polite"></div>
-      </section>
-    </section>
-
-    <!-- GAMES VIEW -->
-    <section id="view-games" class="view" hidden aria-labelledby="games-title">
-      <h2 id="games-title" class="section-title">Browse <span>Games</span></h2>
-      <div class="searchbar" role="search">
-        <label class="visually-hidden" for="search-input">Search games</label>
-        <input id="search-input" type="text" placeholder="Search games..." autocomplete="off" aria-describedby="search-help"/>
-        <button id="search-clear" class="btn btn-outline" aria-label="Clear search">Clear</button>
-      </div>
-      <p id="search-help" class="visually-hidden">Type to filter games by title or description.</p>
-      <div class="game-grid" id="games-grid" aria-live="polite"></div>
-    </section>
-
-    <!-- TECHNOLOGY VIEW -->
-    <section id="view-technology" class="view" hidden aria-labelledby="tech-title">
-      <h2 id="tech-title" class="section-title">Our <span>Technology</span></h2>
-
-      <!-- NEW: search bar for technology -->
-      <div class="searchbar" role="search">
-        <label class="visually-hidden" for="tech-search-input">Search technology</label>
-        <input id="tech-search-input" type="text" placeholder="Search technology..." autocomplete="off" aria-describedby="tech-search-help"/>
-        <button id="tech-search-clear" class="btn btn-outline" aria-label="Clear technology search">Clear</button>
-      </div>
-      <p id="tech-search-help" class="visually-hidden">Type to filter technology by name or description.</p>
-      <!-- /NEW -->
-
-      <div class="tech-container" id="tech-container" aria-live="polite"></div>
-    </section>
-
-    <!-- LEADERBOARD VIEW -->
-    <section id="view-leaderboard" class="view leaderboard" hidden aria-labelledby="leaderboard-title">
-      <h2 id="leaderboard-title" class="section-title">Top <span>Players</span></h2>
-      <ul id="leaderboard-list" aria-live="polite"></ul>
-    </section>
-
-    <!-- SIGN-IN VIEW -->
-    <section id="view-signin" class="view signin" hidden aria-labelledby="signin-title">
-      <h2 id="signin-title" class="section-title">Sign <span>In</span></h2>
-      <form id="player-form" class="inline" aria-describedby="signin-help">
-        <label class="visually-hidden" for="username">Username</label>
-        <input type="text" id="username" name="username" placeholder="Username" required />
-        <label class="visually-hidden" for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Email" required />
-        <button type="submit" class="btn btn-primary">Register</button>
-      </form>
-      <p id="signin-help" class="visually-hidden">Enter a username and email to register.</p>
-    </section>
-
-    <!-- 404 VIEW -->
-    <section id="view-404" class="view" hidden aria-labelledby="notfound-title">
-      <h2 id="notfound-title" class="section-title">Page <span>Not Found</span></h2>
-      <p>We couldn’t find that page. Try the <a href="#/">home page</a>.</p>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer role="contentinfo">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-column">
-          <h3>XYLEX GAMING</h3>
-          <p>Creating the future of interactive entertainment through cutting-edge technology and creativity.</p>
-          <div class="social-links" aria-label="Social media">
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-            <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
-          </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>THE NEXT GENERATION OF <span style="color: var(--accent-light);">GAMING</span></h1>
+                <p>Xylex Gaming is pushing the boundaries of interactive entertainment with cutting-edge technology and unforgettable experiences.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary">Explore Games</a>
+                    <a href="#" class="btn btn-outline">Learn Technology</a>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="footer-column">
-          <h3>Products</h3>
-          <ul>
-            <li><a href="#/games">Games</a></li>
-            <li><a href="#/technology">Technology</a></li>
-            <li><a href="#">Engine</a></li>
-            <li><a href="#">Marketplace</a></li>
-          </ul>
+   <!-- Featured Games -->
+<section class="games">
+  <div class="container">
+    <h2 class="section-title">FEATURED <span>GAMES</span></h2>
+    
+  <div class="game-grid">
+  <!-- Games will be loaded dynamically here, I left it open for js to load it --> 
+</div>
+
+  </div>
+</section>
+
+    <!-- Technology -->
+    <section class="technology">
+        <div class="container">
+            <h2 class="section-title">OUR <span>TECHNOLOGY</span></h2>
+           <div class="tech-container">
+  <!-- Tech cards will be loaded dynamically here -->
+</div>
+
         </div>
+    </section>
 
-        <div class="footer-column">
-          <h3>Company</h3>
-          <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Contact</a></li>
-          </ul>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>XYLEX GAMING</h3>
+                    <p>Creating the future of interactive entertainment through cutting-edge technology and unparalleled creativity.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Products</h3>
+                    <ul>
+                        <li><a href="#">Games</a></li>
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Engine</a></li>
+                        <li><a href="#">Marketplace</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Forums</a></li>
+                        <li><a href="#">Documentation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Xylex Gaming Technologies, Inc. All rights reserved.</p>
+            </div>
         </div>
+    </footer>
 
-        <div class="footer-column">
-          <h3>Newsletter</h3>
-          <form id="newsletter-form" class="inline">
-            <label class="visually-hidden" for="newsletter-email">Email</label>
-            <input id="newsletter-email" type="email" name="email" placeholder="Enter your email" required />
-            <button type="submit" class="btn btn-primary">Subscribe</button>
-          </form>
-        </div>
-      </div>
-      <div class="copyright">
-        <p>&copy; <span id="year"></span> 2025 Xylex Gaming Technologies, Inc. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Modal root -->
-  <div id="modal-root" aria-live="polite"></div>
-
-  <script src="js/main.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
-``
