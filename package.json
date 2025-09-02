@@ -18,7 +18,7 @@
   "author": "Xylex Gaming Inc",
   "license": "MIT",
   "engines": {
-    "node": ">=20 <23"
+    "node": ">=18 <21"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -27,7 +27,7 @@
     "helmet": "^8.1.0",
     "mongodb": "^6.5.0",
     "mongoose": "^8.18.0",
-    "@mongodb-js/saslprep": "^1.1.7"
+    "@mongodb-js/saslprep": "^1.1.4"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
