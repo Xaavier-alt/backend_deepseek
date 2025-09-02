@@ -18,7 +18,7 @@
   "author": "Xylex Gaming Inc",
   "license": "MIT",
   "engines": {
-    "node": ">=18 <21"
+    "node": ">=18 <23"
   },
   "dependencies": {
     "cors": "^2.8.5",
