@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         : "https://xylexgaminginc.onrender.com"; // <-- production backend
 
     // -----------------------
-    // Loading indicator functions (ADD THIS NEW SECTION)
+    // Loading indicator functions
     // -----------------------
     function showLoading(element) {
         element.innerHTML = '<div class="loading-spinner"></div>';
@@ -20,37 +20,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // -----------------------
-    // Fetch and render games (MODIFY THIS EXISTING FUNCTION)
+    // Fetch and render games
     // -----------------------
     async function loadGames() {
         const gameGrid = document.querySelector('.game-grid');
-        showLoading(gameGrid); // ADD THIS LINE
+        showLoading(gameGrid);
         
         try {
             const res = await fetch(`${API_BASE}/api/games`);
-            // Add error handling for HTTP errors
-            if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`);
-            }
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
             
             const games = await res.json();
-            gameGrid.innerHTML = ""; // clear before rendering
+            gameGrid.innerHTML = "";
 
             games.forEach(game => {
                 const card = document.createElement('div');
                 card.classList.add('game-card');
 
-                // Create image container
                 const imgContainer = document.createElement('div');
                 imgContainer.classList.add('game-img');
 
-                // Dynamically add image (point to backend)
                 const img = document.createElement('img');
                 img.src = `${API_BASE}/${game.image}`;
                 img.alt = game.title;
                 imgContainer.appendChild(img);
 
-                // Create content container
                 const content = document.createElement('div');
                 content.classList.add('game-content');
                 content.innerHTML = `
@@ -59,33 +53,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     <a href="${game.link}" class="btn btn-outline">Learn More</a>
                 `;
 
-                // Append image and content to card
                 card.appendChild(imgContainer);
                 card.appendChild(content);
-
-                // Append card to grid
                 gameGrid.appendChild(card);
             });
         } catch (err) {
-            // MODIFY THIS ERROR HANDLING
             gameGrid.innerHTML = '<p class="error-message">Failed to load games. Please try again later.</p>';
             console.error("Error loading games:", err);
         }
     }
 
     // -----------------------
-    // Fetch and render technology (MODIFY THIS EXISTING FUNCTION)
+    // Fetch and render technology
     // -----------------------
     async function loadTechnology() {
         const techContainer = document.querySelector('.tech-container');
-        showLoading(techContainer); // ADD THIS LINE
+        showLoading(techContainer);
         
         try {
             const res = await fetch(`${API_BASE}/api/technology`);
-            // Add error handling for HTTP errors
-            if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`);
-            }
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
             
             const techList = await res.json();
             techContainer.innerHTML = "";
@@ -100,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 techContainer.appendChild(card);
             });
         } catch (err) {
-            // MODIFY THIS ERROR HANDLING
             techContainer.innerHTML = '<p class="error-message">Failed to load technology. Please try again later.</p>';
             console.error("Error loading technology:", err);
         }
@@ -111,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadTechnology();
 
     // -----------------------
-    // Animate elements when they scroll into view
+    // Animate elements on scroll
     // -----------------------
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -143,5 +129,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-});
+    // -----------------------
+    // Modal functionality
+    // -----------------------
+    const signInBtn = document.getElementById('signInBtn');
+    const modal = document.getElementById('signInModal');
+    const closeModal = document.querySelector('.close-modal');
+    const signInForm = document.getElementById('signInForm');
 
+    if (signInBtn && modal && closeModal && signInForm) {
+        signInBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.style.display = 'flex';
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        signInForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            console.log('Sign in attempt:', { email, password });
+            alert('Sign in functionality would connect to your backend. Check the console for details.');
+            modal.style.display = 'none';
+        });
+    }
+
+});
