@@ -3,7 +3,7 @@ require("dotenv").config();
 
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose"); // Use mongoose instead of mongodb
+const { MongoClient, ServerApiVersion } = require("mongodb");
 const cors = require("cors");
 const path = require("path");
 const helmet = require("helmet");
@@ -46,71 +46,76 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 
-// --- MongoDB Connection with Mongoose ---
+// --- MongoDB Connection (Version 4.17.2 - Stable) ---
 const uri = process.env.MONGODB_URI;
+let db, playersCollection, client;
 
-// Player schema
-const playerSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
+async function connectDB() {
+  try {
+    if (!uri) {
+      throw new Error("MONGODB_URI environment variable is not defined");
+    }
+
+    client = new MongoClient(uri, {
+      serverApi: { 
+        version: ServerApiVersion.v1, 
+        strict: true, 
+        deprecationErrors: true 
+      }
+    });
+
+    await client.connect();
+    
+    // Verify connection
+    await client.db("admin").command({ ping: 1 });
+    
+    db = client.db("uvotake");
+    playersCollection = db.collection("players");
+    
+    console.log("✅ MongoDB connected successfully");
+    
+  } catch (err) {
+    console.error("❌ MongoDB connection error:", err.message);
+    
+    // Don't exit process in production, allow the server to run without DB
+    if (NODE_ENV === "development") {
+      process.exit(1);
+    }
   }
-});
-
-const Player = mongoose.model('Player', playerSchema);
-
-// Newsletter schema
-const newsletterSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  subscribedAt: {
-    type: Date,
-    default: Date.now
-  }
-});
-
-const Newsletter = mongoose.model('Newsletter', newsletterSchema);
+}
 
 // Connect to MongoDB
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => {
-  console.log("✅ MongoDB connected successfully");
-})
-.catch((err) => {
-  console.error("❌ MongoDB connection error:", err);
-  // Don't exit in production, allow server to run without DB
-  if (NODE_ENV === "development") {
-    process.exit(1);
+connectDB().catch(console.error);
+
+// Graceful shutdown
+process.on('SIGINT', async () => {
+  if (client) {
+    await client.close();
+    console.log('MongoDB connection closed');
   }
+  process.exit(0);
 });
 
 // --- Routes: Players ---
 app.post("/api/player", async (req, res) => {
   try {
+    // Check if MongoDB is connected
+    if (!playersCollection) {
+      return res.status(503).json({ error: "Database not available" });
+    }
+    
     const { username, email } = req.body || {};
     if (!username || !email) {
       return res.status(400).json({ error: "username and email are required" });
     }
     
-    const player = new Player({ username, email });
-    const result = await player.save();
+    const result = await playersCollection.insertOne({
+      username,
+      email,
+      createdAt: new Date(),
+    });
     
-    res.status(201).json({ ok: true, id: result._id });
+    res.status(201).json({ ok: true, id: result.insertedId });
   } catch (err) {
     if (err.code === 11000) {
       return res.status(409).json({ error: "Email already exists" });
@@ -121,7 +126,12 @@ app.post("/api/player", async (req, res) => {
 
 app.get("/api/players", async (_req, res) => {
   try {
-    const players = await Player.find().sort({ createdAt: -1 }).limit(100);
+    // Check if MongoDB is connected
+    if (!playersCollection) {
+      return res.status(503).json({ error: "Database not available" });
+    }
+    
+    const players = await playersCollection.find().sort({ createdAt: -1 }).limit(100).toArray();
     res.json(players);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -131,17 +141,21 @@ app.get("/api/players", async (_req, res) => {
 // --- Routes: Newsletter ---
 app.post("/api/newsletter", async (req, res) => {
   try {
+    // Check if MongoDB is connected
+    if (!db) {
+      return res.status(503).json({ error: "Database not available" });
+    }
+    
     const { email } = req.body || {};
     if (!email) return res.status(400).json({ error: "Email is required" });
     
-    const subscriber = new Newsletter({ email });
-    await subscriber.save();
+    await db.collection("newsletter").insertOne({ 
+      email, 
+      subscribedAt: new Date() 
+    });
     
     res.status(201).json({ message: "Subscribed!" });
   } catch (err) {
-    if (err.code === 11000) {
-      return res.status(409).json({ error: "Email already subscribed" });
-    }
     res.status(500).json({ error: err.message });
   }
 });
@@ -154,7 +168,7 @@ app.use("/api/technology", techRoutes);
 
 // Health check endpoint
 app.get("/api/health", async (req, res) => {
-  const dbStatus = mongoose.connection.readyState === 1 ? "connected" : "disconnected";
+  const dbStatus = client ? "connected" : "disconnected";
   res.json({ 
     status: "ok", 
     database: dbStatus,
