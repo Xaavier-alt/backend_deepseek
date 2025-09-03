@@ -140,40 +140,101 @@ document.addEventListener('DOMContentLoaded', () => {
     loadTechnology();
 
     // -----------------------
-    // Modal functionality
+    // Sign In Modal functionality
     // -----------------------
     const signInBtn = document.getElementById('signInBtn');
     const modal = document.getElementById('signInModal');
     const closeModal = document.querySelector('.close-modal');
     const signInForm = document.getElementById('signInForm');
 
-    signInBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        modal.style.display = 'flex';
-    });
+    if (signInBtn && modal) {
+        signInBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.style.display = 'flex';
+        });
 
-    closeModal.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) {
+        closeModal.addEventListener('click', () => {
             modal.style.display = 'none';
-        }
-    });
+        });
 
-    signInForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        
-        // Here you would normally send this data to your backend
-        console.log('Sign in attempt:', { email, password });
-        
-        // Show success message
-        alert('Sign in functionality would connect to your backend. Check the console for details.');
-        modal.style.display = 'none';
-    });
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        signInForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Here you would normally send this data to your backend
+            console.log('Sign in attempt:', { email, password });
+            
+            // Show success message
+            alert('Sign in functionality would connect to your backend. Check the console for details.');
+            modal.style.display = 'none';
+        });
+    }
+
+    // -----------------------
+    // Download Modal functionality
+    // -----------------------
+    const downloadBtn = document.getElementById('downloadBtn');
+    const downloadModal = document.getElementById('downloadModal');
+    const closeDownloadModal = downloadModal ? downloadModal.querySelector('.close-modal') : null;
+    const pcDownloadBtn = document.querySelector('.pc-download');
+    const comingSoonMessage = document.getElementById('comingSoonMessage');
+
+    if (downloadBtn && downloadModal) {
+        // Open download modal
+        downloadBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            downloadModal.style.display = 'flex';
+        });
+
+        // Close download modal
+        closeDownloadModal.addEventListener('click', function() {
+            downloadModal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target === downloadModal) {
+                downloadModal.style.display = 'none';
+            }
+        });
+
+        // PC download functionality (coming soon)
+        if (pcDownloadBtn) {
+            pcDownloadBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Show coming soon message if not already visible
+                if (comingSoonMessage) {
+                    comingSoonMessage.style.display = 'block';
+                }
+                
+                // You could also implement a newsletter signup here
+                setTimeout(() => {
+                    alert('PC client is coming soon! Sign up for our newsletter to be notified when it launches.');
+                }, 300);
+            });
+        }
+
+        // Optional: Add animation to platform options
+        document.querySelectorAll('.platform-option').forEach(option => {
+            option.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.3)';
+            });
+            
+            option.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
+            });
+        });
+    }
 
     // -----------------------
     // Animate elements when they scroll into view

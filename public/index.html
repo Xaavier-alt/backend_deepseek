@@ -417,6 +417,57 @@
             color: var(--text);
         }
 
+        /* Download Modal Styles */
+.download-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.platform-option {
+    text-align: center;
+    padding: 20px;
+    background: var(--secondary);
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.platform-option:hover {
+    transform: translateY(-5px);
+}
+
+.platform-option i {
+    margin-bottom: 15px;
+    color: var(--accent);
+}
+
+.platform-option h3 {
+    margin: 10px 0;
+    color: var(--accent-light);
+}
+
+.platform-option p {
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.coming-soon {
+    background: rgba(53, 223, 54, 0.1);
+    border-left: 4px solid var(--accent);
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.coming-soon p {
+    margin: 0;
+    color: var(--accent-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
         /* Responsive */
         @media (max-width: 992px) {
             .hero h1 {
@@ -447,26 +498,36 @@
             }
         }
 
-        @media (max-width: 576px) {
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
-            }
+@media (max-width: 576px) {
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
 
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 
-            .hero h1 {
-                font-size: 2rem;
-            }
+    .hero h1 {
+        font-size: 2rem;
+    }
 
-            .hero p {
-                font-size: 1rem;
-            }
-        }
-    </style>
+    .hero p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .download-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .platform-option {
+        padding: 15px;
+    }
+}
+</style>
 </head>
 <body>
     <!-- Header -->
@@ -489,7 +550,7 @@
                 </nav>
                 <div class="nav-buttons">
                     <a href="#" class="btn btn-outline" id="signInBtn">Sign In</a>
-                    <a href="#" class="btn btn-primary">Download</a>
+                    <a href="#" class="btn btn-primary" id="downloadBtn">Download</a>
                 </div>
             </div>
         </div>
@@ -643,6 +704,38 @@
             </form>
         </div>
     </div>
+
+    <!-- Download Modal -->
+    <div class="modal" id="downloadModal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Download Xylex Games</h2>
+        <p>Choose your platform to download our gaming platform:</p>
+        <div class="download-options">
+            <div class="platform-option">
+                <i class="fas fa-desktop fa-3x"></i>
+                <h3>PC</h3>
+                <p>Windows, Mac, and Linux</p>
+                <a href="#" class="btn btn-primary pc-download">Download for PC</a>
+            </div>
+            <div class="platform-option">
+                <i class="fab fa-xbox fa-3x"></i>
+                <h3>Xbox</h3>
+                <p>Xbox Series X|S and Xbox One</p>
+                <a href="https://www.xbox.com/en-US/games/store" target="_blank" class="btn btn-primary">Xbox Store</a>
+            </div>
+            <div class="platform-option">
+                <i class="fab fa-playstation fa-3x"></i>
+                <h3>PlayStation</h3>
+                <p>PS5, PS4, and PS4 Pro</p>
+                <a href="https://store.playstation.com" target="_blank" class="btn btn-primary">PlayStation Store</a>
+            </div>
+        </div>
+        <div class="coming-soon" id="comingSoonMessage">
+            <p><i class="fas fa-info-circle"></i> PC client coming soon. Console versions will be available on respective stores at launch.</p>
+        </div>
+    </div>
+</div>
 
     <script src="js/main.js"></script>
 </body>
