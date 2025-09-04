@@ -7,7 +7,7 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "build": "npm rebuild",
-    "postinstall": "node fix-base64url.js"
+    "postinstall": "node fix-base64url.js && node fix-passport-oauth2.js"
   },
   "keywords": [
     "gaming",
