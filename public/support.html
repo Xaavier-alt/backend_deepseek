@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support - Xylex Gaming</title>
+
+  <!-- Shared Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #121212;
+      --secondary: #1a1a1a;
+      --accent: #35df36;
+      --accent-light: #35df36;
+      --text: #ffffff;
+      --text-secondary: #b3b3b3;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--primary);
+      color: var(--text);
+      margin: 0;
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100px;
+      background: rgba(18,18,18,0.9);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .header-content { display: flex; justify-content: space-between; align-items: center; }
+    nav ul { list-style: none; display: flex; gap: 30px; margin: 0; padding: 0; }
+    nav a { color: var(--text); text-decoration: none; transition: 0.3s; }
+    nav a:hover { color: var(--accent-light); }
+
+    .support { padding: 140px 0 80px; }
+    .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 40px; }
+    .section-title span { color: var(--accent); }
+
+    .support-options { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; margin-bottom: 60px; }
+    .support-card { background: var(--secondary); padding: 30px; border-radius: 10px; text-align: center; flex: 1; min-width: 280px; }
+    .support-card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 15px; }
+    .support-card h3 { margin-bottom: 10px; }
+
+    .btn { padding: 10px 20px; border: 1px solid var(--accent); border-radius: 4px; color: var(--accent); text-decoration: none; transition: 0.3s; display: inline-block; margin-top: 10px; }
+    .btn:hover { background: var(--accent); color: var(--text); }
+
+    .support-topics h3 { margin-bottom: 20px; text-align: center; }
+    .topics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+    .topic { background: var(--secondary); padding: 12px; border-radius: 6px; text-align: center; color: var(--accent); text-decoration: none; }
+    .topic:hover { background: var(--accent); color: var(--text); }
+
+    .contact-support { margin-top: 60px; text-align: center; }
+    .contact-methods { display: flex; gap: 20px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+    .contact-link { color: var(--accent); text-decoration: none; }
+    .contact-link i { margin-right: 8px; }
+    .contact-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <a href="index.html"><img src="images/Xylex logo main.png" alt="Xylex Gaming Logo" style="max-height:80px;"></a>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/news.html">News</a></li>
+            <li><a href="/jobs.html">Jobs</a></li>
+            <li><a href="/support.html">Support</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Support Section -->
+  <section class="support" id="support">
+    <div class="container">
+        <h2 class="section-title">PLAYER <span>SUPPORT</span></h2>
+        
+        <div class="support-options">
+            <div class="support-card">
+                <i class="fas fa-question-circle"></i>
+                <h3>Knowledge Base</h3>
+                <p>Find answers to common questions and solutions to known issues</p>
+                <a href="#" class="btn">Browse Articles</a>
+            </div>
+            
+            <div class="support-card">
+                <i class="fas fa-bug"></i>
+                <h3>Report Issues</h3>
+                <p>Submit bug reports and technical issues to our development team</p>
+                <a href="#" class="btn">Submit Ticket</a>
+            </div>
+            
+            <div class="support-card">
+                <i class="fas fa-comments"></i>
+                <h3>Community Forums</h3>
+                <p>Get help from other players and share your experiences</p>
+                <a href="#" class="btn">Join Discussion</a>
+            </div>
+        </div>
+        
+        <div class="support-topics">
+            <h3>Popular Support Topics</h3>
+            <div class="topics-grid">
+                <a href="#" class="topic">System Requirements</a>
+                <a href="#" class="topic">Installation Guide</a>
+                <a href="#" class="topic">Performance Optimization</a>
+                <a href="#" class="topic">Multiplayer Connection</a>
+                <a href="#" class="topic">Account Recovery</a>
+                <a href="#" class="topic">Payment Issues</a>
+                <a href="#" class="topic">Controller Support</a>
+                <a href="#" class="topic">VR Setup Guide</a>
+            </div>
+        </div>
+        
+        <div class="contact-support">
+            <h3>Still Need Help?</h3>
+            <p>Our support team is available 24/7 to assist you</p>
+            <div class="contact-methods">
+                <a href="mailto:xylexgaminginc@gmail.com" class="contact-link">
+                    <i class="fas fa-envelope"></i> xylexgaminginc@gmail.com
+                </a>
+
+                <a href="#" class="contact-link">
+                    <i class="fas fa-comment-dots"></i> Live Chat
+                </a>
+            </div>
+        </div>
+    </div>
+  </section>
+</body>
+</html>

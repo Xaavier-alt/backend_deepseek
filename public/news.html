@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News - Xylex Gaming</title>
+
+  <!-- Copy from index.html -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+     :root {
+        --primary: #121212;
+        --secondary: #1a1a1a;
+        --accent: #35df36;
+        --accent-light: #35df36;
+        --accent-dark:#11b10f;
+        --text: #ffffff;
+        --text-secondary: #b3b3b3;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: var(--primary);
+        color: var(--text);
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    header {
+        background-color: rgba(18, 18, 18, 0.9);
+        backdrop-filter: blur(10px);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 0 20px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+    }
+
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .logo img {
+        max-height: 100px;
+        width: auto;
+        display: block;
+    }
+
+    nav ul {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+        align-items: center;
+    }
+
+    nav a {
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 16px;
+        transition: color 0.3s;
+    }
+
+    nav a:hover {
+        color: var(--accent-light);
+    }
+
+    /* News Section */
+    .news {
+        padding: 120px 0 80px;
+        background-color: var(--secondary);
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 60px;
+        font-size: 2.5rem;
+    }
+
+    .section-title span {
+        color: var(--accent);
+    }
+
+    .news-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+    }
+
+    .news-card {
+        background: linear-gradient(145deg, #1a1a1a, #222);
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .news-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .news-image {
+        position: relative;
+    }
+
+    .news-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .news-date {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background: var(--accent);
+        color: var(--text);
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+
+    .news-content {
+        padding: 20px;
+    }
+
+    .news-content h3 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+    }
+
+    .news-content p {
+        color: var(--text-secondary);
+        margin-bottom: 15px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .btn-outline {
+        border: 1px solid var(--accent);
+        color: var(--accent);
+    }
+
+    .btn-outline:hover {
+        background-color: var(--accent);
+        color: var(--text);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <a href="index.html">
+            <img src="images/Xylex logo main.png" alt="Xylex Gaming Logo">
+          </a>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/news.html">News</a></li>
+            <li><a href="/jobs.html">Jobs</a></li>
+            <li><a href="/support.html">Support</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- News Section -->
+  <section class="news" id="news">
+    <div class="container">
+        <h2 class="section-title">XYLEX <span>NEWS</span></h2>
+        <div class="news-grid">
+            <!-- News Article 1 -->
+            <article class="news-card">
+                <div class="news-image">
+                    <img src="images/news/game-announcement.jpg" alt="Game Announcement">
+                    <div class="news-date">Sept 3, 2025</div>
+                </div>
+                <div class="news-content">
+                    <h3>FURIOSA Gameplay Reveal at GameCon 2025</h3>
+                    <p>Get your first look at gameplay from our upcoming Mad Max saga game...</p>
+                    <a href="#" class="btn btn-outline">Read More</a>
+                </div>
+            </article>
+
+            <!-- News Article 2 -->
+            <article class="news-card">
+                <div class="news-image">
+                    <img src="images/news/tech-update.jpg" alt="Technology Update">
+                    <div class="news-date">Aug 28, 2025</div>
+                </div>
+                <div class="news-content">
+                    <h3>XGI Engine 2.0: Next-Gen Graphics Showcase</h3>
+                    <p>Our proprietary engine achieves photorealism with new lighting system...</p>
+                    <a href="#" class="btn btn-outline">Read More</a>
+                </div>
+            </article>
+
+            <!-- News Article 3 -->
+            <article class="news-card">
+                <div class="news-image">
+                    <img src="images/news/partnership.jpg" alt="Partnership Announcement">
+                    <div class="news-date">Aug 15, 2025</div>
+                </div>
+                <div class="news-content">
+                    <h3>Xylex Partners with NVIDIA</h3>
+                    <p>Exclusive partnership brings cutting-edge ray tracing to our games...</p>
+                    <a href="#" class="btn btn-outline">Read More</a>
+                </div>
+            </article>
+        </div>
+    </div>
+  </section>
+</body>
+</html>
