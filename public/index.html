@@ -418,56 +418,102 @@
         }
 
         /* Download Modal Styles */
-.download-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin: 25px 0;
-}
+        .download-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
 
-.platform-option {
-    text-align: center;
-    padding: 20px;
-    background: var(--secondary);
-    border-radius: 10px;
-    transition: transform 0.3s;
-}
+        .platform-option {
+            text-align: center;
+            padding: 20px;
+            background: var(--secondary);
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
 
-.platform-option:hover {
-    transform: translateY(-5px);
-}
+        .platform-option:hover {
+            transform: translateY(-5px);
+        }
 
-.platform-option i {
-    margin-bottom: 15px;
-    color: var(--accent);
-}
+        .platform-option i {
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
 
-.platform-option h3 {
-    margin: 10px 0;
-    color: var(--accent-light);
-}
+        .platform-option h3 {
+            margin: 10px 0;
+            color: var(--accent-light);
+        }
 
-.platform-option p {
-    color: var(--text-secondary);
-    margin-bottom: 15px;
-    font-size: 0.9rem;
-}
+        .platform-option p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
 
-.coming-soon {
-    background: rgba(53, 223, 54, 0.1);
-    border-left: 4px solid var(--accent);
-    padding: 15px;
-    margin-top: 20px;
-    border-radius: 4px;
-}
+        .coming-soon {
+            background: rgba(53, 223, 54, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
 
-.coming-soon p {
-    margin: 0;
-    color: var(--accent-light);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+        .coming-soon p {
+            margin: 0;
+            color: var(--accent-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-google {
+            background: #fff;
+            color: #444;
+            border: 1px solid #ddd;
+            font-weight: 500;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .btn-google i {
+            margin-right: 8px;
+            color: #db4437;
+        }
+
+        .btn-discord {
+            background: #5865f2;
+            color: #fff;
+            font-weight: 500;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .btn-discord i {
+            margin-right: 8px;
+        }
+
+        .social-signup {
+            margin: 15px 0;
+        }
+
         /* Responsive */
         @media (max-width: 992px) {
             .hero h1 {
@@ -496,38 +542,36 @@
             nav ul {
                 gap: 15px;
             }
+            
+            .download-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .platform-option {
+                padding: 15px;
+            }
         }
 
-@media (max-width: 576px) {
-    .header-content {
-        flex-direction: column;
-        gap: 15px;
-    }
+        @media (max-width: 576px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
 
-    nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
 
-    .hero h1 {
-        font-size: 2rem;
-    }
+            .hero h1 {
+                font-size: 2rem;
+            }
 
-    .hero p {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .download-options {
-        grid-template-columns: 1fr;
-    }
-    
-    .platform-option {
-        padding: 15px;
-    }
-}
-</style>
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -645,12 +689,12 @@
                     <h3>XYLEX GAMING</h3>
                     <p>Creating the future of interactive entertainment through cutting-edge technology and unparalleled creativity.</p>
                     <div class="social-links">
-    <a href="https://x.com/@Xylexgaminginc" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
-    <a href="https://web.facebook.com/profile.php?id=61579842392872" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-    <a href="https://www.instagram.com/xylexgaming/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-     <a href="https://youtube.com/xylexgaming" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
-    <a href="https://discord.gg/xylexgaming" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i></a>
-</div>
+                        <a href="https://x.com/Xylexgaminginc" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                        <a href="https://web.facebook.com/profile.php?id=61579842392872" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/xylexgaming/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/xylexgaming" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                        <a href="https://discord.gg/xylexgaming" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i></a>
+                    </div>
                 </div>
                 <div class="footer-column">
                     <h3>Products</h3>
@@ -702,40 +746,96 @@
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%">Sign In</button>
             </form>
+            
+            <div style="text-align: center; margin: 15px 0; color: #aaa;">
+                — or sign in with —
+            </div>
+            
+            <div class="social-signup">
+                <button onclick="window.location.href='/auth/google'" class="btn btn-google">
+                    <i class="fab fa-google"></i> Sign in with Google
+                </button>
+                <button onclick="window.location.href='/auth/discord'" class="btn btn-discord">
+                    <i class="fab fa-discord"></i> Sign in with Discord
+                </button>
+            </div>
+            
+            <p style="margin-top: 15px; text-align: center;">
+                Don't have an account? 
+                <a href="#" id="openSignUp">Sign Up</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div class="modal" id="signUpModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Create Account</h2>
+            
+            <div class="social-signup">
+                <button onclick="window.location.href='/auth/google'" class="btn btn-google">
+                    <i class="fab fa-google"></i> Sign up with Google
+                </button>
+                <button onclick="window.location.href='/auth/discord'" class="btn btn-discord">
+                    <i class="fab fa-discord"></i> Sign up with Discord
+                </button>
+            </div>
+            
+            <div style="text-align: center; margin: 15px 0; color: #aaa;">
+                — or sign up with email —
+            </div>
+            
+            <form id="signUpForm">
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%">Sign Up</button>
+            </form>
+            
+            <p style="margin-top: 15px; text-align: center;">
+                Already have an account? 
+                <a href="#" id="openSignIn">Sign In</a>
+            </p>
         </div>
     </div>
 
     <!-- Download Modal -->
     <div class="modal" id="downloadModal">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h2>Download Xylex Games</h2>
-        <p>Choose your platform to download our gaming platform:</p>
-        <div class="download-options">
-            <div class="platform-option">
-                <i class="fas fa-desktop fa-3x"></i>
-                <h3>PC</h3>
-                <p>Windows, Mac, and Linux</p>
-                <a href="#" class="btn btn-primary pc-download">Download for PC</a>
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Download Xylex Games</h2>
+            <p>Choose your platform to download our gaming platform:</p>
+            <div class="download-options">
+                <div class="platform-option">
+                    <i class="fas fa-desktop fa-3x"></i>
+                    <h3>PC</h3>
+                    <p>Windows, Mac, and Linux</p>
+                    <a href="#" class="btn btn-primary pc-download">Download for PC</a>
+                </div>
+                <div class="platform-option">
+                    <i class="fab fa-xbox fa-3x"></i>
+                    <h3>Xbox</h3>
+                    <p>Xbox Series X|S and Xbox One</p>
+                    <a href="https://www.xbox.com/en-US/games/store" target="_blank" class="btn btn-primary">Xbox Store</a>
+                </div>
+                <div class="platform-option">
+                    <i class="fab fa-playstation fa-3x"></i>
+                    <h3>PlayStation</h3>
+                    <p>PS5, PS4, and PS4 Pro</p>
+                    <a href="https://store.playstation.com" target="_blank" class="btn btn-primary">PlayStation Store</a>
+                </div>
             </div>
-            <div class="platform-option">
-                <i class="fab fa-xbox fa-3x"></i>
-                <h3>Xbox</h3>
-                <p>Xbox Series X|S and Xbox One</p>
-                <a href="https://www.xbox.com/en-US/games/store" target="_blank" class="btn btn-primary">Xbox Store</a>
+            <div class="coming-soon" id="comingSoonMessage">
+                <p><i class="fas fa-info-circle"></i> PC client coming soon. Console versions will be available on respective stores at launch.</p>
             </div>
-            <div class="platform-option">
-                <i class="fab fa-playstation fa-3x"></i>
-                <h3>PlayStation</h3>
-                <p>PS5, PS4, and PS4 Pro</p>
-                <a href="https://store.playstation.com" target="_blank" class="btn btn-primary">PlayStation Store</a>
-            </div>
-        </div>
-        <div class="coming-soon" id="comingSoonMessage">
-            <p><i class="fas fa-info-circle"></i> PC client coming soon. Console versions will be available on respective stores at launch.</p>
         </div>
     </div>
-</div>
 
     <script src="js/main.js"></script>
 </body>
