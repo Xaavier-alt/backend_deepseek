@@ -1,5 +1,15 @@
+// Load environment variables explicitly
+require('dotenv').config();
+
+// DEBUG: Check what environment variables are loaded
+console.log('=== ENVIRONMENT VARIABLES DEBUG ===');
+console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID ? '✅ EXISTS' : '❌ MISSING');
+console.log('GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET ? '✅ EXISTS' : '❌ MISSING');
+console.log('MONGODB_URI:', process.env.MONGODB_URI ? '✅ EXISTS' : '❌ MISSING');
+console.log('PORT:', process.env.PORT || '5000 (default)');
+console.log('====================================');
+
 require("dns").setDefaultResultOrder("ipv4first");
-require("dotenv").config();
 
 const express = require("express");
 const session = require("express-session");
