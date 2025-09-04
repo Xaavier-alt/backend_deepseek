@@ -1,4 +1,6 @@
+# ------------------------------
 # Logs
+# ------------------------------
 logs
 *.log
 npm-debug.log*
@@ -7,62 +9,74 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
+# ------------------------------
 # Diagnostic reports
+# ------------------------------
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
+# ------------------------------
 # Runtime data
+# ------------------------------
 pids
 *.pid
 *.seed
 *.pid.lock
 
-# Coverage and instrumented libraries
+# ------------------------------
+# Coverage and instrumented libs
+# ------------------------------
 lib-cov
-coverage
+coverage/
 *.lcov
 .nyc_output
 
-# Grunt/Bower/Snowpack/TypeScript cache
-.grunt
-bower_components
-jspm_packages/
-web_modules/
-*.tsbuildinfo
-
-# Node/npm/yarn cache
+# ------------------------------
+# Node / package manager cache
+# ------------------------------
+node_modules/
 .npm
+.yarn/
+.pnp.*
 .eslintcache
 .stylelintcache
 .rpt2_cache/
-.rts2_cache_cjs/
-.rts2_cache_es/
-.rts2_cache_umd/
+.rts2_cache_*/
 .node_repl_history
 *.tgz
-.yarn-integrity
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
-.yarn/install-state.gz
-.pnp.*
 
+# ------------------------------
 # Build outputs
-build/Release
-dist
-.next
-out
-.nuxt
-.cache
-.temp
-.parcel-cache
-.vuepress/dist
+# ------------------------------
+dist/
+build/
+.cache/
+.temp/
+.next/
+out/
+.nuxt/
+.parcel-cache/
+.vuepress/dist/
 .serverless/
 .fusebox/
 .dynamodb/
 
-# Environment files
+# ------------------------------
+# Environment & secrets
+# ------------------------------
 .env
-.env.development.local
-.env.test.local
-.env.production.local
 .env.local
+.env.*.local
+
+# OAuth / Google / API secrets
+client_secret_*.json
+*.pem
+*.key
+*.crt
+
+# ------------------------------
+# System / IDE files
+# ------------------------------
+.vscode/
+.history/
+.DS_Store
+Thumbs.db
