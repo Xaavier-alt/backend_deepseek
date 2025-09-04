@@ -7,7 +7,7 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "build": "npm rebuild",
-    "postinstall": "node final-fix.js"
+    "postinstall": "node comprehensive-fix.js"
   },
   "keywords": [
     "gaming",
