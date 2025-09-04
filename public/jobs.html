@@ -58,25 +58,95 @@
     nav a:hover { color: var(--accent-light); }
 
     /* Jobs Section */
-    .jobs { padding: 120px 0 80px; background-color: var(--secondary); }
+    .jobs { padding: 120px 0 80px; }
     .section-title { text-align: center; margin-bottom: 40px; font-size: 2.5rem; }
     .section-title span { color: var(--accent); }
-    .jobs-intro { text-align: center; margin-bottom: 40px; color: var(--text-secondary); }
+    .jobs-intro { text-align: center; margin-bottom: 40px; color: var(--text-secondary); max-width: 800px; margin-left: auto; margin-right: auto; }
 
-    .departments { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 60px; }
-    .department h3 { margin-bottom: 15px; color: var(--accent-light); }
-    .job-list li { margin-bottom: 10px; }
-    .job-list a { color: var(--text); text-decoration: none; transition: color 0.3s; }
-    .job-list a:hover { color: var(--accent); }
+    .departments-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        margin-bottom: 60px;
+    }
+    
+    .department {
+        background: var(--secondary);
+        padding: 30px;
+        border-radius: 10px;
+        border-left: 4px solid var(--accent);
+    }
+    
+    .department h3 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: var(--accent-light);
+    }
+    
+    .job-list {
+        list-style: none;
+    }
+    
+    .job-list li {
+        margin-bottom: 12px;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 5px;
+        transition: all 0.3s;
+    }
+    
+    .job-list li:hover {
+        background: rgba(53, 223, 54, 0.1);
+        transform: translateX(5px);
+    }
+    
+    .job-list a {
+        color: var(--text);
+        text-decoration: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 500;
+    }
+    
+    .job-list a:hover {
+        color: var(--accent-light);
+    }
+    
+    .job-list i {
+        color: var(--accent);
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    
+    .job-list li:hover i {
+        opacity: 1;
+    }
 
     .company-culture h3 { text-align: center; margin-bottom: 30px; }
     .benefits { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
     .benefit { flex: 1 1 250px; background: #1f1f1f; padding: 20px; border-radius: 10px; text-align: center; }
     .benefit i { font-size: 2rem; margin-bottom: 10px; color: var(--accent); }
     .benefit h4 { margin-bottom: 10px; }
+
+    @media (max-width: 768px) {
+        .departments-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        nav ul {
+            gap: 15px;
+        }
+        
+        .header-content {
+            flex-direction: column;
+            gap: 15px;
+        }
+    }
   </style>
 </head>
 <body>
+
   <!-- Header -->
   <header>
     <div class="container">
@@ -88,12 +158,17 @@
         </div>
         <nav>
           <ul>
-            <li><a href="/index.html">Home</a></li>
-            <li><a href="/news.html">News</a></li>
-            <li><a href="/jobs.html">Jobs</a></li>
-            <li><a href="/support.html">Support</a></li>
+            <li><a href="index.html#games">Games</a></li>
+            <li><a href="index.html#technology">Technology</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="jobs.html">Jobs</a></li>
+            <li><a href="support.html">Support</a></li>
           </ul>
         </nav>
+        <div class="nav-buttons">
+          <a href="#" class="btn btn-outline" id="signInBtn">Sign In</a>
+          <a href="#" class="btn btn-primary" id="downloadBtn">Download</a>
+        </div>
       </div>
     </div>
   </header>
@@ -101,57 +176,38 @@
   <!-- Jobs Section -->
   <section class="jobs" id="jobs">
     <div class="container">
-        <h2 class="section-title">CAREER <span>OPPORTUNITIES</span></h2>
+        <h2 class="section-title">JOIN OUR <span>TEAM</span></h2>
         <div class="jobs-intro">
             <p>At Xylex Gaming, we're crafting the future of interactive entertainment. Our mission drives us: deliver immersive, genre-defining experiences powered by passion, cutting-edge technology, and limitless creativity. If you're eager to shape the next generation of gaming, explore the dynamic roles waiting for you across three pillars of innovation.
 
 Game Development — At the Heart of Creativity
+Our Game Development team brings worlds to life through innovative design, stunning visuals, and masterful storytelling. We're on the lookout for;
 
-Our Game Development team brings worlds to life through innovative design, stunning visuals, and masterful storytelling. We're on the lookout for:
-
-Senior Game Programmers with robust knowledge of programming languages (C++, C#) and real-time architecture to lead gameplay mechanics and performance optimization.
-
+Senior Game Programmers with robust knowledge of programming languages (C++, C#) and real-time architecture to lead gameplay mechanics and performance optimization. 
 Level Designers who can architect compelling game spaces—balancing aesthetics, pacing, and player experience to create memorable encounters.
-
 3D Artists with a keen eye for detail and lore—producing high-fidelity models, textures, and environments that elevate every pixel.
-
 Animation Specialists capable of infusing characters and creatures with lifelike motion while maintaining efficiency across pipelines.
-
 If you're passionate, imaginative, and ready to bring worlds to steps to life, there's a place for your craft here.
 
-
 Technology — The Engine of Innovation
-
-Behind every stunning world lies powerful tech. Xylex Googling's Technology team is the backbone that keeps gameplay fast, smooth, and scalable. We seek:
-
+Behind every stunning world lies powerful tech. Xylex Googling's Technology team is the backbone that keeps gameplay fast, smooth, and scalable. We seek;
 Engine Programmers adept at optimizing core systems—rendering, memory, tools, performance—to empower creators with powerful pipelines.
-
 AI Developers designing intelligent behaviors and reactive systems that elevate character interactions and emergent gameplay.
-
 VR/AR Engineers pushing the boundaries of immersive experiences, blending virtual and physical worlds with precision and performance.
-
 Tools Programmers developing intuitive, efficient tools and editors, enabling seamless collaboration between designers, artists, and engineers.
-
 If you thrive in a technical, experimental playground, your skills will power tomorrow’s immersive realities.
 
 
 Creative — Shape Narratives and Aesthetics
-
-Xylex Gaming believes that every button clicked, character voiced, and interface touched plays a role in emotional impact. The Creative team crafts memorable experiences through:
-
+Xylex Gaming believes that every button clicked, character voiced, and interface touched plays a role in emotional impact. The Creative team crafts memorable experiences through;
 Concept Artists sketching early ideations for characters, environments, and props that shape a game's visual direction.
-
 Sound Designers weaving soundscapes that set mood—from subtle ambient cues to impactful cinematic audio.
-
 Narrative Writers constructing rich lore, compelling dialogue, and branching storylines that keep players invested.
-
 UI/UX Designers crafting intuitive, immersive interfaces that make navigation a delight and expectations second nature.
-
 If you’re creative, empathetic, and eager to evoke emotion through interactive media, you belong here.
 
 
 Why Join Xylex?
-
 Cutting-Edge Technology: Work with proprietary technologies like our powerful XGI engine, designed for next-gen performance.
 
 Creative Freedom: We believe great ideas flourish in autonomy—with room to experiment, prototype, and iterate.
@@ -161,38 +217,63 @@ Passionate Team: More than colleagues, we are fellow gamers—collaborating with
 Whether your masterpiece is an optimized engine routine, a stunning cinematic tableau, or a plot twist that stays with you for days, Xylex Gaming offers the platform to elevate your talent and impact the industry.
 
 Ready to Join Us?
-
 Xylex Gaming is more than a workplace—it’s a launchpad for your career. Explore openings on our careers page, and let’s build unforgettable adventures—together.</p>
         </div>
-        
-        <div class="departments">
+        <div class="departments-grid">
             <div class="department">
                 <h3>🎮 Game Development</h3>
                 <ul class="job-list">
-                    <li><a href="careers.html?position=Senior+Game+Programmer">Senior Game Programmer</a></li>
-                    <li><a href="careers.html?position=Level+Designer">Level Designer</a></li>
-                    <li><a href="careers.html?position=3D+Artist">3D Artist</a></li>
-                    <li><a href="careers.html?position=Animation+Specialist">Animation Specialist</a></li>
+                    <li><a href="careers.html?position=Senior+Game+Programmer">Senior Game Programmer <i class="fas fa-arrow-right"></i></a></li>
+                    <li><a href="careers.html?position=Level+Designer">Level Designer <i class="fas fa-arrow-right"></i></a></li>
+                    <li><a href="careers.html?position=3D+Artist">3D Artist <i class="fas fa-arrow-right"></i></a></li>
+                    <li><a href="careers.html?position=Animation+Specialist">Animation Specialist <i class="fas fa-arrow-right"></i></a></li>
                 </ul>
             </div>
             
             <div class="department">
                 <h3>⚙️ Technology</h3>
                 <ul class="job-list">
-                    <li><a href="careers.html?position=Engine+Programmer">Engine Programmer</a></li>
-                    <li><a href="careers.html?position=AI+Developer">AI Developer</a></li>
-                    <li><a href="careers.html?position=VR/AR+Engineer">VR/AR Engineer</a></li>
-                    <li><a href="careers.html?position=Tools+Programmer">Tools Programmer</a></li>
+                    <li><a href="careers.html?position=Engine+Programmer">Engine Programmer <i class="fas fa-arrow-right"></i></a></li>
+                    <li><a href="careers.html?position=AI+Developer">AI Developer <i class="fas fa-arrow-right"></i></a></li>
+                    <li><a href="careers.html?position=VR/AR+Engineer">VR/AR Engineer <i class="fas fa-arrow-right"></i></a></li>
+                    <li><a href="careers.html?position=Tools+Programmer">Tools Programmer <i class="fas fa-arrow-right"></i></a></li>
                 </ul>
             </div>
             
             <div class="department">
                 <h3>🎨 Creative</h3>
                 <ul class="job-list">
-                    <li><a href="careers.html?position=Concept+Artist">Concept Artist</a></li>
-                    <li><a href="careers.html?position=Sound+Designer">Sound Designer</a></li>
-                    <li><a href="careers.html?position=Narrative+Writer">Narrative Writer</a></li>
-                    <li><a href="careers.html?position=UI/UX+Designer">UI/UX Designer</a></li>
+                    <li><a href="careers.html?position=Concept+Artist">Concept Artist <i class="fas fa-arrow-right"></i></a></li>
+                    <li><a href="careers.html?position=UI/UX+Designer">UI/UX Designer <i class="fas fa-arrow-right"></i></a></li>
+                    <li><a href="careers.html?position=Narrative+Writer">Narrative Writer <i class="fas fa-arrow-right"></i></a></li>
+                    <li><a href="careers.html?position=VFX/SFX+Artist">VFX/SFX Artist <i class="fas fa-arrow-right"></i></a></li>
+                </ul>
+            </div>
+            
+            <div class="department">
+                <h3>🔊 Audio</h3>
+                <ul class="job-list">
+                    <li><a href="careers.html?position=Sound+Designer">Sound Designer <i class="fas fa-arrow-right"></i></a></li>
+                    <li><a href="careers.html?position=Composer">Composer <i class="fas fa-arrow-right"></i></a></li>
+                    <li><a href="careers.html?position=Voice+Director">Voice Director <i class="fas fa-arrow-right"></i></a></li>
+                </ul>
+            </div>
+            
+            <div class="department">
+                <h3>🚀 Production</h3>
+                <ul class="job-list">
+                    <li><a href="careers.html?position=Project+Manager">Project Manager <i class="fas fa-arrow-right"></i></a></li>
+                    <li><a href="careers.html?position=Producer">Producer <i class="fas fa-arrow-right"></i></a></li>
+                    <li><a href="careers.html?position=QA+Tester">QA Tester <i class="fas fa-arrow-right"></i></a></li>
+                </ul>
+            </div>
+            
+            <div class="department">
+                <h3>🌐 Marketing</h3>
+                <ul class="job-list">
+                    <li><a href="careers.html?position=Community+Manager">Community Manager <i class="fas fa-arrow-right"></i></a></li>
+                    <li><a href="careers.html?position=Social+Media+Manager">Social Media Manager <i class="fas fa-arrow-right"></i></a></li>
+                    <li><a href="careers.html?position=Marketing+Specialist">Marketing Specialist <i class="fas fa-arrow-right"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -213,11 +294,35 @@ Xylex Gaming is more than a workplace—it’s a launchpad for your career. Expl
                 <div class="benefit">
                     <i class="fas fa-heart"></i>
                     <h4>Passionate Team</h4>
-                    <p>Join gamers making games for gamers</p>
+                    <p>Join the best team of game devs making games for gamers</p>
+                </div>
+                <div class="benefit">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Career Growth</h4>
+                    <p>Opportunities for advancement and skill development</p>
                 </div>
             </div>
         </div>
     </div>
   </section>
+
+  <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>XYLEX GAMING</h3>
+                    <p>Creating the future of interactive entertainment through cutting-edge technology and unparalleled creativity.</p>
+                    <div class="social-links">
+                        <a href="https://x.com/Xylexgaminginc" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                        <a href="https://web.facebook.com/profile.php?id=61579842392872" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/xylexgaming/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/xylexgaming" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                        <a href="https://discord.gg/xylexgaming" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+</footer>
+    <script>
+    document.head.appendChild(style);
+  </script>
 </body>
 </html>

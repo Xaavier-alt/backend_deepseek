@@ -1,4 +1,44 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Add navigation buttons styling if not already in your CSS
+    const style = document.createElement('style');
+    style.textContent = `
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-block;
+        }
+        
+        .btn-outline {
+            border: 1px solid var(--accent);
+            color: var(--accent);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--accent);
+            color: var(--text);
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--text);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--accent-light);
+        }
+    `;
+    document.head.appendChild(style);
+
     // Fallback data in case API calls fail
     const fallbackGames = [
         {
@@ -51,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // -----------------------
     async function loadGames() {
         const gameGrid = document.getElementById('gameGrid');
+        if (!gameGrid) return; // Exit if not on a page with game grid
         
         try {
             const res = await fetch(`${API_BASE}/api/games`);
@@ -69,6 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderGames(games) {
         const gameGrid = document.getElementById('gameGrid');
+        if (!gameGrid) return;
+        
         gameGrid.innerHTML = "";
 
         games.forEach(game => {
@@ -103,6 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // -----------------------
     async function loadTechnology() {
         const techContainer = document.getElementById('techContainer');
+        if (!techContainer) return; // Exit if not on a page with tech container
         
         try {
             const res = await fetch(`${API_BASE}/api/technology`);
@@ -121,6 +165,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderTechnology(techList) {
         const techContainer = document.getElementById('techContainer');
+        if (!techContainer) return;
+        
         techContainer.innerHTML = "";
 
         techList.forEach(tech => {
@@ -135,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Call both loaders
+    // Call both loaders (they'll exit early if elements don't exist)
     loadGames();
     loadTechnology();
 
@@ -163,18 +209,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        signInForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            // Here you would normally send this data to your backend
-            console.log('Sign in attempt:', { email, password });
-            
-            // Show success message
-            alert('Sign in functionality would connect to your backend. Check the console for details.');
-            modal.style.display = 'none';
-        });
+        if (signInForm) {
+            signInForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                // Here you would normally send this data to your backend
+                console.log('Sign in attempt:', { email, password });
+                
+                // Show success message
+                alert('Sign in functionality would connect to your backend. Check the console for details.');
+                modal.style.display = 'none';
+            });
+        }
     }
 
     // -----------------------
@@ -194,9 +242,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Close download modal
-        closeDownloadModal.addEventListener('click', function() {
-            downloadModal.style.display = 'none';
-        });
+        if (closeDownloadModal) {
+            closeDownloadModal.addEventListener('click', function() {
+                downloadModal.style.display = 'none';
+            });
+        }
 
         // Close modal when clicking outside
         window.addEventListener('click', function(e) {
@@ -237,6 +287,93 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // -----------------------
+    // Job Application Form functionality (for careers.html)
+    // -----------------------
+    const jobForm = document.getElementById('jobApplicationForm');
+    if (jobForm) {
+        const resumeInput = document.getElementById('resume');
+        const fileName = document.getElementById('fileName');
+        const successMessage = document.getElementById('successMessage');
+        
+        // Show selected file name
+        if (resumeInput && fileName) {
+            resumeInput.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    fileName.textContent = this.files[0].name;
+                } else {
+                    fileName.textContent = 'No file chosen';
+                }
+            });
+        }
+        
+        // Form submission
+        jobForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic validation
+            let isValid = true;
+            const requiredFields = jobForm.querySelectorAll('[required]');
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.style.borderColor = '#ff6b6b';
+                } else {
+                    field.style.borderColor = '#333';
+                }
+            });
+            
+            if (isValid) {
+                // In a real application, you would send this data to your server
+                console.log('Job application submitted with:', {
+                    firstName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    email: document.getElementById('email').value,
+                    position: document.getElementById('position').value,
+                    experience: document.getElementById('experience').value,
+                    coverLetter: document.getElementById('coverLetter').value,
+                    portfolio: document.getElementById('portfolio').value,
+                    howHeard: document.getElementById('howHeard').value
+                });
+                
+                // Show success message
+                if (successMessage) {
+                    successMessage.style.display = 'block';
+                    jobForm.reset();
+                    
+                    if (fileName) {
+                        fileName.textContent = 'No file chosen';
+                    }
+                    
+                    // Scroll to success message
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+
+        // Auto-select position from URL parameters (for careers.html)
+        const urlParams = new URLSearchParams(window.location.search);
+        const positionParam = urlParams.get('position');
+        
+        if (positionParam) {
+            const positionSelect = document.getElementById('position');
+            if (positionSelect) {
+                // Decode the URL parameter (convert "+" back to spaces)
+                const decodedPosition = decodeURIComponent(positionParam.replace(/\+/g, ' '));
+                
+                // Try to find and select the matching option
+                for (let i = 0; i < positionSelect.options.length; i++) {
+                    if (positionSelect.options[i].value === decodedPosition || 
+                        positionSelect.options[i].text === decodedPosition) {
+                        positionSelect.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    // -----------------------
     // Animate elements when they scroll into view
     // -----------------------
     const observer = new IntersectionObserver((entries) => {
@@ -259,13 +396,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Header scroll effect
     // -----------------------
     const header = document.querySelector('header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.style.backgroundColor = 'rgba(18, 18, 18, 0.95)';
-            header.style.padding = '10px 0';
-        } else {
-            header.style.backgroundColor = 'rgba(18, 18, 18, 0.9)';
-            header.style.padding = '15px 0';
-        }
-    });
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.style.backgroundColor = 'rgba(18, 18, 18, 0.95)';
+                header.style.padding = '10px 0';
+            } else {
+                header.style.backgroundColor = 'rgba(18, 18, 18, 0.9)';
+                header.style.padding = '15px 0';
+            }
+        });
+    }
 });
