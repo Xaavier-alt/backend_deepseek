@@ -185,6 +185,23 @@
         background-color: var(--accent);
         color: var(--text);
     }
+
+    /* Two-image grid style */
+.news-image.two-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    position: relative;
+}
+
+.news-image.two-grid img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
   </style>
 </head>
 <body>
@@ -214,41 +231,44 @@
     <div class="container">
         <h2 class="section-title">XYLEX <span>NEWS</span></h2>
         <div class="news-grid">
+
             <!-- News Article 1 -->
             <article class="news-card">
                 <div class="news-image">
-                    <img src="images/news/game-announcement.jpg" alt="Game Announcement">
-                    <div class="news-date">Sept 3, 2025</div>
+                    <img src="images/gameannouncement2.avif" alt="Game Announcement">
+                    <div class="news-date">Sept 3, 2026</div>
                 </div>
                 <div class="news-content">
-                    <h3>FURIOSA Gameplay Reveal at GameCon 2025</h3>
+                    <h3>FURIOSA Gameplay Reveal at GameCon 2026</h3>
                     <p>Get your first look at gameplay from our upcoming Mad Max saga game...</p>
                     <a href="#" class="btn btn-outline">Read More</a>
                 </div>
             </article>
 
-            <!-- News Article 2 -->
-            <article class="news-card">
-                <div class="news-image">
-                    <img src="images/news/tech-update.jpg" alt="Technology Update">
-                    <div class="news-date">Aug 28, 2025</div>
-                </div>
-                <div class="news-content">
-                    <h3>XGI Engine 2.0: Next-Gen Graphics Showcase</h3>
-                    <p>Our proprietary engine achieves photorealism with new lighting system...</p>
-                    <a href="#" class="btn btn-outline">Read More</a>
-                </div>
-            </article>
+         <!-- News Article 2 -->
+<article class="news-card">
+    <div class="news-image two-grid">
+        <img src="images/graphic.jpg" alt="Face Model Update">
+        <img src="images/graphic2.jpg" alt="Unreal Labs Game face model">
+        <div class="news-date">Feb 28, 2026</div>
+    </div>
+    <div class="news-content">
+        <h3>XGI Engine 2.0: Next-Gen Graphics Showcase</h3>
+        <p>Our proprietary engine achieves photorealism with new lighting system...</p>
+        <a href="#" class="btn btn-outline">Read More</a>
+    </div>
+</article>
+
 
             <!-- News Article 3 -->
             <article class="news-card">
                 <div class="news-image">
-                    <img src="images/news/partnership.jpg" alt="Partnership Announcement">
-                    <div class="news-date">Aug 15, 2025</div>
+                    <img src="images/nvidia.webp" alt="Partnership Announcement">
+                    <div class="news-date">Aug 15, 2026</div>
                 </div>
                 <div class="news-content">
                     <h3>Xylex Partners with NVIDIA</h3>
-                    <p>Exclusive partnership brings cutting-edge ray tracing to our games...</p>
+                    <p>Exclusive partnership brings cutting-edge advancements to our games...</p>
                     <a href="#" class="btn btn-outline">Read More</a>
                 </div>
             </article>
