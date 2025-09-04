@@ -2,85 +2,84 @@
 const fs = require('fs');
 const path = require('path');
 
-console.log('🔧 Fixing base64url package for CommonJS compatibility...');
+console.log('🔧 FORCEFULLY fixing base64url package...');
 
 const base64urlDir = path.join(__dirname, 'node_modules', 'base64url');
-const indexFile = path.join(base64urlDir, 'index.js');
 
 try {
-  // First, check what files actually exist in the base64url package
-  const files = fs.readdirSync(base64urlDir);
-  console.log('Base64url package contents:', files);
-  
-  // Check if dist directory exists
-  const distDir = path.join(base64urlDir, 'dist');
-  let distFiles = [];
-  if (fs.existsSync(distDir)) {
-    distFiles = fs.readdirSync(distDir);
-    console.log('Dist directory contents:', distFiles);
+  if (!fs.existsSync(base64urlDir)) {
+    console.log('✓ base64url package not found, no fix needed');
+    process.exit(0);
   }
+
+  const indexFile = path.join(base64urlDir, 'index.js');
   
-  // Check what the current index.js contains
-  let currentContent = '';
-  if (fs.existsSync(indexFile)) {
-    currentContent = fs.readFileSync(indexFile, 'utf8');
-    console.log('Current index.js content:', currentContent);
+  // COMPLETELY REPLACE the base64url package with our own implementation
+  const forcedFixContent = `
+// FORCED FIX: Complete base64url implementation
+// This replaces the broken package entirely
+
+function encode(input, encoding) {
+  if (Buffer.isBuffer(input)) {
+    return fromBase64(input.toString('base64'));
   }
-  
-  // Determine the correct fix based on what files exist
-  let fixedContent;
-  
-  if (distFiles.includes('base64url.js')) {
-    // If dist/base64url.js exists, use the default export fix
-    fixedContent = `
-const base64url = require('./dist/base64url.js');
-module.exports = base64url.default;
-    `.trim();
-    console.log('Using dist/base64url.js fix');
-    
-  } else if (files.includes('dist.js')) {
-    // If there's a dist.js file instead
-    fixedContent = `
-const base64url = require('./dist.js');
-module.exports = base64url.default || base64url;
-    `.trim();
-    console.log('Using dist.js fix');
-    
-  } else if (files.includes('index.js') && currentContent.includes('lib/')) {
-    // If it's pointing to lib directory
-    fixedContent = `
-const base64url = require('./lib/base64url');
-module.exports = base64url.default || base64url;
-    `.trim();
-    console.log('Using lib directory fix');
-    
-  } else {
-    // Fallback: try to require the package directly
-    try {
-      const base64url = require('base64url');
-      console.log('Package already works, no fix needed');
-      process.exit(0);
-    } catch (error) {
-      console.log('Could not determine correct fix structure');
-      throw error;
+  return fromBase64(Buffer.from(input, encoding || 'utf8').toString('base64'));
+}
+
+function decode(input) {
+  return Buffer.from(toBase64(input), 'base64').toString();
+}
+
+function toBase64(input) {
+  // Add padding if needed
+  let pad = input.length % 4;
+  if (pad) {
+    if (pad === 1) {
+      throw new Error('Invalid base64url string');
     }
+    input += '='.repeat(4 - pad);
   }
-  
-  // Apply the fix
-  fs.writeFileSync(indexFile, fixedContent, 'utf8');
-  console.log('✓ Fixed base64url/index.js');
-  
-  // Verify the fix works
+  return input.replace(/-/g, '+').replace(/_/g, '/');
+}
+
+function fromBase64(input) {
+  return input.replace(/\\+/g, '-').replace(/\\//g, '_').replace(/=/g, '');
+}
+
+function toBuffer(input) {
+  return Buffer.from(toBase64(input), 'base64');
+}
+
+module.exports = {
+  encode,
+  decode,
+  toBase64,
+  fromBase64,
+  toBuffer
+};
+  `.trim();
+
+  // Apply the forced fix
+  fs.writeFileSync(indexFile, forcedFixContent, 'utf8');
+  console.log('✓ COMPLETELY replaced base64url implementation');
+
+  // Also, let's ensure the dist directory doesn't cause issues
+  const distDir = path.join(base64urlDir, 'dist');
+  if (fs.existsSync(distDir)) {
+    console.log('⚠️ dist directory exists, but we\'re using our own implementation');
+  }
+
+  // Test if it works
   try {
     const base64url = require('base64url');
-    console.log('✓ Verification passed - base64url loaded successfully');
-    console.log('Available functions:', Object.keys(base64url).filter(key => typeof base64url[key] === 'function'));
-  } catch (verifyError) {
-    console.log('⚠️ Verification failed, but fix applied. Error:', verifyError.message);
+    console.log('✓ Forced fix verified successfully');
+    console.log('Available functions:', Object.keys(base64url).filter(k => typeof base64url[k] === 'function'));
+  } catch (testError) {
+    console.log('⚠️ Forced fix test failed:', testError.message);
   }
-  
+
 } catch (error) {
-  console.log('❌ Error fixing base64url:', error.message);
-  // Don't exit with error code 1, as we want the build to continue
-  console.log('⚠️ Continuing build despite base64url fix error');
+  console.log('❌ Error in forced fix script:', error.message);
+  // Don't break the build
+  console.log('⚠️ Continuing build despite error');
 }
