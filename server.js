@@ -79,36 +79,53 @@ app.use(passport.session());
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((obj, done) => done(null, obj));
 
-// Google Strategy
-const googleCallbackURL = process.env.GOOGLE_CALLBACK_URL 
-  ? process.env.GOOGLE_CALLBACK_URL.split(',')[0].trim()
-  : '/auth/google/callback';
+// Google Strategy - with error handling
+if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+  console.log('⚠️  Google OAuth disabled - credentials missing from environment');
+} else {
+  const googleCallbackURL = process.env.GOOGLE_CALLBACK_URL 
+    ? process.env.GOOGLE_CALLBACK_URL.split(',')[0].trim()
+    : '/auth/google/callback';
 
-passport.use(new GoogleStrategy(
-  {
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: googleCallbackURL
-  },
-  function(accessToken, refreshToken, profile, done) {
-    return done(null, profile);
-  }
-));
-
-// Discord Strategy
-passport.use(
-  new DiscordStrategy(
+  passport.use(new GoogleStrategy(
     {
-      clientID: process.env.DISCORD_CLIENT_ID,
-      clientSecret: process.env.DISCORD_CLIENT_SECRET,
-      callbackURL: process.env.DISCORD_CALLBACK_URL,
-      scope: ["identify", "email"],
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: googleCallbackURL
     },
-    (accessToken, refreshToken, profile, done) => {
+    function(accessToken, refreshToken, profile, done) {
       return done(null, profile);
     }
-  )
-);
+  ));
+  console.log('✅ Google OAuth strategy configured');
+}
+
+// Discord Strategy - with error handling
+if (!process.env.DISCORD_CLIENT_ID || !process.env.DISCORD_CLIENT_SECRET) {
+  console.log('⚠️  Discord OAuth disabled - credentials missing from environment');
+} else {
+  // Fix Discord callback URL if it's incorrectly set to the auth URL
+  let discordCallbackURL = process.env.DISCORD_CALLBACK_URL;
+  if (discordCallbackURL && discordCallbackURL.includes('discord.com/oauth2/authorize')) {
+    discordCallbackURL = 'https://xylexgaminginc.onrender.com/auth/discord/callback';
+    console.log('⚠️  Fixed Discord callback URL from auth URL to callback endpoint');
+  }
+  
+  passport.use(
+    new DiscordStrategy(
+      {
+        clientID: process.env.DISCORD_CLIENT_ID,
+        clientSecret: process.env.DISCORD_CLIENT_SECRET,
+        callbackURL: discordCallbackURL || '/auth/discord/callback',
+        scope: ["identify", "email"],
+      },
+      (accessToken, refreshToken, profile, done) => {
+        return done(null, profile);
+      }
+    )
+  );
+  console.log('✅ Discord OAuth strategy configured');
+}
 
 // ---------------------
 // JSON parsing & static assets
