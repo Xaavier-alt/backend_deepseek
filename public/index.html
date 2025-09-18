@@ -468,26 +468,30 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         .btn-google {
-            background: #fff;
-            color: #444;
-            border: 1px solid #ddd;
+            background-color: #4285F4; /* Google Blue — button background */
+            color: white;              /* White text for contrast */
+            border: none;
+            padding: 10px 16px;
+            border-radius: 4px;
+            font-family: 'Roboto', Arial, sans-serif;
             font-weight: 500;
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            margin: 5px 0;
             cursor: pointer;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            text-decoration: none;
+            gap: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.25);
         }
 
-        .btn-google i {
-            margin-right: 8px;
-            color: #db4437;
+        .btn-google i,
+        .btn-google svg {
+            color: #DB4437; /* Google Red — for the icon */
+            font-size: 18px;
+        }
+
+        .btn-google:hover {
+            background-color: #3367D6; /* Slightly darker blue on hover */
         }
 
         .btn-discord {
@@ -620,24 +624,24 @@
             <h2 class="section-title">FEATURED <span>GAMES</span></h2>
             <div class="game-grid" id="gameGrid">
                 <!-- Games will be loaded dynamically here -->
-                <!-- Fallback content in case JavaScript doesn't load -->
+                <!-- Fallback content in case my JavaScript doesn't load -->
                 <div class="game-card">
                     <div class="game-img">
-                        <img src="images/FURIOSAoverlay main.png" alt="FURIOSA Game">
+                       <img src="images/JOHNWICKoverlay main.png" alt="JOHN WICK Game">
                     </div>
                     <div class="game-content">
-                        <h3>FURIOSA: A Mad-Max Saga (UNRELEASED)</h3>
-                        <p>Embark on a scorching odyssey of vengeance across a savage wasteland in this vehicular combat masterpiece.</p>
+                        <h3>JOHN WICK (UNRELEASED)</h3>
+                        <p>Live the story of a secret assassin on a relentless crusade through the assassin underworld in this brutally elegant and intense action-packed gameplay.</p>
                         <a href="#" class="btn btn-outline">Learn More</a>
                     </div>
                 </div>
                 <div class="game-card">
                     <div class="game-img">
-                        <img src="images/JOHNWICKoverlay main.png" alt="JOHN WICK Game">
+                        <img src="images/FURIOSAoverlay main.png" alt="FURIOSA Game"> 
                     </div>
                     <div class="game-content">
-                        <h3>JOHN WICK (coming soon...)</h3>
-                        <p>Live the story of a secret assassin on a relentless crusade through the assassin underworld in this brutally elegant and intense action-packed gameplay.</p>
+                        <h3>FURIOSA: A Mad-Max Saga (coming soon...)</h3>
+                        <p>Embark on a scorching odyssey of vengeance across a savage wasteland in this vehicular combat masterpiece.</p>
                         <a href="#" class="btn btn-outline">Learn More</a>
                     </div>
                 </div>
