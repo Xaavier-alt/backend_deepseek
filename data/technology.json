@@ -1,5 +1,11 @@
 [
   { "title": "XGI AI Systems", "description": "Next-generation AI that creates dynamic, responsive gameplay experiences.", "icon": "fas fa-brain" },
   { "title": "Immersive Reality", "description": "Breakthrough VR and AR technologies that blur the line between virtual and real world.", "icon": "fas fa-vr-cardboard" },
-  { "title": "Quantum Engine", "description": "Proprietary game engine powering photorealistic graphics and massive open worlds.", "icon": "fas fa-bolt" }
+  {
+  "title": "Unreal Engine",
+  "description": "Unreal game engine powering photorealistic graphics and massive open worlds.",
+  "icon": "/images/unreal_engine_logo.png",
+  "type": "image"
+}
+
 ]
