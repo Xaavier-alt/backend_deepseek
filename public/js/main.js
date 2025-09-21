@@ -62,9 +62,14 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const fallbackTechnology = [
-        { title: "XGI AI Systems", description: "Next-generation AI that creates dynamic, responsive gameplay experiences.", icon: "fas fa-brain" },
-        { title: "Immersive Reality", description: "Breakthrough VR and AR technologies that blur the line between virtual and real world.", icon: "fas fa-vr-cardboard" },
-        { title: "Quantum Engine", description: "Proprietary game engine powering photorealistic graphics and massive open worlds.", icon: "fas fa-bolt" }
+        { title: "XGI AI Systems", description: "Next-generation AI that creates dynamic, responsive gameplay experiences.", icon: "fas fa-brain", type: "icon" },
+        { title: "Immersive Reality", description: "Breakthrough VR and AR technologies that blur the line between virtual and real world.", icon: "fas fa-vr-cardboard", type: "icon" },
+        { 
+            title: "Unreal Engine", 
+            description: "Unreal game engine powering photorealistic graphics and massive open worlds.", 
+            icon: "https://upload.wikimedia.org/wikipedia/commons/2/20/Unreal_Engine_Logo.svg", 
+            type: "image" 
+        }
     ];
 
     // -----------------------
@@ -122,7 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
             imgContainer.classList.add('game-img');
 
             const img = document.createElement('img');
-            // Use the image from API or fallback
             img.src = game.image.startsWith('http') ? game.image : `${API_BASE}${game.image}`;
             img.alt = game.title;
             imgContainer.appendChild(img);
@@ -146,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // -----------------------
     async function loadTechnology() {
         const techContainer = document.getElementById('techContainer');
-        if (!techContainer) return; // Exit if not on a page with tech container
+        if (!techContainer) return; 
         
         try {
             const res = await fetch(`${API_BASE}/api/technology`);
@@ -172,16 +176,25 @@ document.addEventListener('DOMContentLoaded', () => {
         techList.forEach(tech => {
             const card = document.createElement('div');
             card.classList.add('tech-card');
+
+            let iconHTML = "";
+            if (tech.type === "image") {
+                iconHTML = `<img src="${tech.icon}" alt="${tech.title} Logo" style="width:40px;height:40px;">`;
+            } else {
+                iconHTML = `<i class="${tech.icon}"></i>`;
+            }
+
             card.innerHTML = `
-                <div class="tech-icon"><i class="${tech.icon}"></i></div>
+                <div class="tech-icon">${iconHTML}</div>
                 <h3>${tech.title}</h3>
                 <p>${tech.description}</p>
             `;
+
             techContainer.appendChild(card);
         });
     }
 
-    // Call both loaders (they'll exit early if elements don't exist)
+    // Call both loaders
     loadGames();
     loadTechnology();
 
@@ -215,10 +228,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const email = document.getElementById('email').value;
                 const password = document.getElementById('password').value;
                 
-                // Here you would normally send this data to your backend
                 console.log('Sign in attempt:', { email, password });
                 
-                // Show success message
                 alert('Sign in functionality would connect to your backend. Check the console for details.');
                 modal.style.display = 'none';
             });
@@ -235,44 +246,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const comingSoonMessage = document.getElementById('comingSoonMessage');
 
     if (downloadBtn && downloadModal) {
-        // Open download modal
         downloadBtn.addEventListener('click', function(e) {
             e.preventDefault();
             downloadModal.style.display = 'flex';
         });
 
-        // Close download modal
         if (closeDownloadModal) {
             closeDownloadModal.addEventListener('click', function() {
                 downloadModal.style.display = 'none';
             });
         }
 
-        // Close modal when clicking outside
         window.addEventListener('click', function(e) {
             if (e.target === downloadModal) {
                 downloadModal.style.display = 'none';
             }
         });
 
-        // PC download functionality (coming soon)
         if (pcDownloadBtn) {
             pcDownloadBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 
-                // Show coming soon message if not already visible
                 if (comingSoonMessage) {
                     comingSoonMessage.style.display = 'block';
                 }
                 
-                // You could also implement a newsletter signup here
                 setTimeout(() => {
                     alert('PC client is coming soon! Sign up for our newsletter to be notified when it launches.');
                 }, 300);
             });
         }
 
-        // Optional: Add animation to platform options
         document.querySelectorAll('.platform-option').forEach(option => {
             option.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-5px)';
@@ -287,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // -----------------------
-    // Job Application Form functionality (for careers.html)
+    // Job Application Form functionality
     // -----------------------
     const jobForm = document.getElementById('jobApplicationForm');
     if (jobForm) {
@@ -295,7 +299,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const fileName = document.getElementById('fileName');
         const successMessage = document.getElementById('successMessage');
         
-        // Show selected file name
         if (resumeInput && fileName) {
             resumeInput.addEventListener('change', function() {
                 if (this.files.length > 0) {
@@ -306,11 +309,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
         
-        // Form submission
         jobForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Basic validation
             let isValid = true;
             const requiredFields = jobForm.querySelectorAll('[required]');
             
@@ -324,7 +325,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             
             if (isValid) {
-                // In a real application, you would send this data to your server
                 console.log('Job application submitted with:', {
                     firstName: document.getElementById('firstName').value,
                     lastName: document.getElementById('lastName').value,
@@ -336,7 +336,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     howHeard: document.getElementById('howHeard').value
                 });
                 
-                // Show success message
                 if (successMessage) {
                     successMessage.style.display = 'block';
                     jobForm.reset();
@@ -345,23 +344,19 @@ document.addEventListener('DOMContentLoaded', () => {
                         fileName.textContent = 'No file chosen';
                     }
                     
-                    // Scroll to success message
                     successMessage.scrollIntoView({ behavior: 'smooth' });
                 }
             }
         });
 
-        // Auto-select position from URL parameters (for careers.html)
         const urlParams = new URLSearchParams(window.location.search);
         const positionParam = urlParams.get('position');
         
         if (positionParam) {
             const positionSelect = document.getElementById('position');
             if (positionSelect) {
-                // Decode the URL parameter (convert "+" back to spaces)
                 const decodedPosition = decodeURIComponent(positionParam.replace(/\+/g, ' '));
                 
-                // Try to find and select the matching option
                 for (let i = 0; i < positionSelect.options.length; i++) {
                     if (positionSelect.options[i].value === decodedPosition || 
                         positionSelect.options[i].text === decodedPosition) {
