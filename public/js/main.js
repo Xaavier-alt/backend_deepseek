@@ -1,12 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Add navigation buttons styling if not already in your CSS
+    // -----------------------
+    // Add navigation buttons styling
+    // -----------------------
     const style = document.createElement('style');
     style.textContent = `
         .nav-buttons {
             display: flex;
             gap: 15px;
-        }
-        
+        }  
+
         .btn {
             padding: 10px 20px;
             border-radius: 4px;
@@ -39,7 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(style);
 
-    // Fallback data in case API calls fail
+    // -----------------------
+    // Fallback data
+    // -----------------------
     const fallbackGames = [
         {
             title: "FURIOSA: A Mad-Max Saga (UNRELEASED)",
@@ -67,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { 
             title: "Unreal Engine", 
             description: "Unreal game engine powering photorealistic graphics and massive open worlds.", 
-            icon: "https://upload.wikimedia.org/wikipedia/commons/2/20/Unreal_Engine_Logo.svg", 
+            icon: "/images/unreal_engine_logo.png", 
             type: "image" 
         }
     ];
@@ -96,14 +100,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // -----------------------
     async function loadGames() {
         const gameGrid = document.getElementById('gameGrid');
-        if (!gameGrid) return; // Exit if not on a page with game grid
+        if (!gameGrid) return;
         
         try {
             const res = await fetch(`${API_BASE}/api/games`);
-            
-            if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`);
-            }
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
             
             const games = await res.json();
             renderGames(games);
@@ -154,10 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         try {
             const res = await fetch(`${API_BASE}/api/technology`);
-            
-            if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`);
-            }
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
             
             const techList = await res.json();
             renderTechnology(techList);
@@ -179,7 +177,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let iconHTML = "";
             if (tech.type === "image") {
-                iconHTML = `<img src="${tech.icon}" alt="${tech.title} Logo" style="width:40px;height:40px;">`;
+                // ✅ Make PNG behave like the Font Awesome icons (3rem)
+                iconHTML = `<img src="${tech.icon}" alt="${tech.title} Logo" style="width:3rem;height:3rem;object-fit:contain;display:inline-block;">`;
             } else {
                 iconHTML = `<i class="${tech.icon}"></i>`;
             }
@@ -369,7 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // -----------------------
-    // Animate elements when they scroll into view
+    // Animate elements on scroll
     // -----------------------
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {

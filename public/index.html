@@ -262,41 +262,50 @@
             color: var(--text-secondary);
             margin-bottom: 20px;
         }
+/* Technology */
+.technology {
+    padding: 100px 0;
+    background-color: var(--primary);
+}
 
-        /* Technology */
-        .technology {
-            padding: 100px 0;
-            background-color: var(--primary);
-        }
+.tech-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+}
 
-        .tech-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            justify-content: center;
-        }
+.tech-card {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    background-color: var(--secondary);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
 
-        .tech-card {
-            flex: 1;
-            min-width: 300px;
-            max-width: 400px;
-            background-color: var(--secondary);
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
+.tech-icon {
+    font-size: 3rem;
+    color: var(--accent);
+    margin-bottom: 20px;
+}
 
-        .tech-icon {
-            font-size: 3rem;
-            color: var(--accent);
-            margin-bottom: 20px;
-        }
+/*  Only apply if the tech icon is an image */
+.tech-icon img {
+    width: 3rem;       /* matches the 3rem font-size */
+    height: 3rem;
+    object-fit: contain;
+    display: inline-block;
+    filter: invert(63%) sepia(79%) saturate(423%) hue-rotate(140deg) brightness(90%) contrast(90%);
+    /* optional: tint the PNG toward my accent color */
+}
 
-        .tech-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
+.tech-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
 
         /* Footer */
         footer {
@@ -470,23 +479,20 @@
         }
 
         .btn-google {
-            background-color: #4285F4; /* Google Blue — button background */
+            background: white; /* Google Blue — button background */
             color: white;              /* White text for contrast */
             border: none;
-            padding: 10px 16px;
-            border-radius: 4px;
-            font-family: 'Roboto', Arial, sans-serif;
+            padding: 10px;
+            border-radius: 5px;
             font-weight: 500;
             cursor: pointer;
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.25);
         }
 
         .btn-google i,
         .btn-google svg {
-            color: #DB4437; /* Google Red — for the icon */
+            background-color: #DB4437; /* Google Red — for the icon */
             font-size: 18px;
         }
 
@@ -678,8 +684,7 @@
             </div>
             <div class="tech-card">
                 <div class="tech-icon">
-                    <!-- Unreal Engine 5 icon (using Font Awesome "U" logo placeholder or SVG) -->
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Unreal_Engine_Logo.svg" alt="Unreal Engine Logo" style="width:40px;height:40px;">
+                    <img src="images/unreal_engine_logo.png" alt="Unreal Engine Logo">
                 </div>
                 <h3>Unreal Engine</h3>
                 <p>Unreal game engine powering photorealistic graphics and massive open worlds.</p>
