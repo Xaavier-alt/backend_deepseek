@@ -286,30 +286,26 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 .tech-icon {
-    font-size: 3rem;
-    color: var(--accent);
-    margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 5rem; /* ensures all icons share equal vertical space */
+    height: 80px;        /* ensures consistent spacing */
+    margin-bottom: 20px;
+}
+
+.tech-icon i {
+    font-size: 3rem;
+    color: var(--accent);
 }
 
 .tech-icon img {
-    width: 4.5rem; /* balanced visual size with font icons */
-    height: 4.5rem;
+    width: 70px;         /* make PNG large enough to match Font Awesome icon */
+    height: auto;        /* keeps logo proportion correct */
     object-fit: contain;
     display: inline-block;
-    margin: 0 auto;
-    filter: invert(63%) sepia(79%) saturate(423%) hue-rotate(140deg) brightness(90%) contrast(90%);
 }
 
-.tech-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-}
-
-        /* Footer */
+/* Footer */
         footer {
             background-color: #0a0a0a;
             padding: 60px 0 30px;
