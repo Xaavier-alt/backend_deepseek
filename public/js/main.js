@@ -134,10 +134,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const content = document.createElement('div');
             content.classList.add('game-content');
+            // Create a slug for server-side detail page
+            const slugify = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+            const slug = slugify(game.title || '');
+            const detailUrl = `${window.location.origin}/games/${slug}`;
+
             content.innerHTML = `
                 <h3>${game.title}</h3>
                 <p>${game.description}</p>
-                <a href="${game.link}" class="btn btn-outline">Learn More</a>
+                <a href="${detailUrl}" class="btn btn-outline">Learn More</a>
             `;
 
             card.appendChild(imgContainer);

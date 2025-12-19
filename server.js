@@ -253,6 +253,50 @@ const techRoutes = require("./routes/technology");
 app.use("/api/games", gameRoutes);
 app.use("/api/technology", techRoutes);
 
+// ---------------------
+// Server-side game detail page
+// ---------------------
+app.get('/games/:slug', (req, res) => {
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    const gamesPath = path.join(__dirname, 'data', 'games.json');
+    const gamesRaw = fs.readFileSync(gamesPath, 'utf8');
+    const games = JSON.parse(gamesRaw);
+    const slug = req.params.slug;
+
+    // helper to slugify titles in the same way the frontend will
+    const slugify = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+    const game = games.find(g => slugify(g.title || '') === slug);
+    if (!game) return res.status(404).send('<h1>Game not found</h1>');
+
+    // Build a minimal HTML detail page (keeps site chrome simple)
+    const imageUrl = game.image && game.image.startsWith('/') ? `/images/${path.basename(game.image)}` : game.image;
+    res.send(`
+      <!doctype html>
+      <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>${game.title}</title>
+        <style>body{background:#0b0b0b;color:#fff;font-family:Arial,Helvetica,sans-serif;padding:24px}img{max-width:100%;height:auto;border-radius:8px}a{color:#35df36}</style>
+      </head>
+      <body>
+        <a href="/">← Back</a>
+        <h1>${game.title}</h1>
+        <p style="color:#b3b3b3;max-width:800px">${game.description || ''}</p>
+        ${imageUrl ? `<img src="${imageUrl}" alt="${game.title}">` : ''}
+        <p><a href="${game.link || '#'}" target="_blank" rel="noopener">Official Link / Learn More</a></p>
+      </body>
+      </html>
+    `);
+  } catch (err) {
+    console.error('Error serving game detail:', err);
+    res.status(500).send('<h1>Server error</h1>');
+  }
+});
+
 // Health check
 app.get("/api/health", async (req, res) => {
   const dbStatus = client ? "connected" : "disconnected";

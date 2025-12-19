@@ -289,8 +289,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 80px;        /* ensures consistent spacing */
+    min-height: 80px;        /* keep spacing but allow centered content */
     margin-bottom: 20px;
+}
+
+/* Ensure font icons and PNG behave identically */
+.tech-icon i,
+.tech-icon img {
+    width: 3rem;
+    height: 3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
 }
 
 .tech-icon i {
@@ -299,10 +310,9 @@
 }
 
 .tech-icon img {
-    width: 3rem;         /* match Font Awesome icon size */
-    height: 3rem;        /* ensure square sizing like icons */
     object-fit: contain;
-    display: inline-block;
+    /* remove any default image spacing and force crisp rendering */
+    image-rendering: -webkit-optimize-contrast;
 }
 
 /* Footer */
