@@ -120,9 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         gameGrid.innerHTML = "";
 
-        games.forEach(game => {
+        games.forEach((game, index) => {
             const card = document.createElement('div');
             card.classList.add('game-card');
+            const cardId = `game-card-${index}`;
+            card.id = cardId;
 
             const imgContainer = document.createElement('div');
             imgContainer.classList.add('game-img');
@@ -134,21 +136,80 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const content = document.createElement('div');
             content.classList.add('game-content');
-            // Create a slug for server-side detail page
+            
             const slugify = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
             const slug = slugify(game.title || '');
-            const detailUrl = `${window.location.origin}/games/${slug}`;
 
+            const learnMoreId = `learn-more-${index}`;
+            const downloadBtnId = `download-icon-${index}`;
             content.innerHTML = `
                 <h3>${game.title}</h3>
                 <p>${game.description}</p>
-                <a href="${detailUrl}" class="btn btn-outline">Learn More</a>
+                <div class="game-actions">
+                    <button id="${learnMoreId}" class="btn btn-outline">Learn More</button>
+                    <button id="${downloadBtnId}" class="download-icon-btn" title="Download Game"><i class="fas fa-download"></i></button>
+                </div>
             `;
 
             card.appendChild(imgContainer);
             card.appendChild(content);
             gameGrid.appendChild(card);
+            
+            // Add event listener for Learn More button
+            const learnMoreBtn = document.getElementById(learnMoreId);
+            if (learnMoreBtn && game.youtube) {
+                learnMoreBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    toggleGameVideo(cardId, game);
+                });
+            }
+
+            // Add event listener for download icon
+            const downloadIconBtn = document.getElementById(downloadBtnId);
+            if (downloadIconBtn) {
+                downloadIconBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const modal = document.getElementById('downloadModal');
+                    if (modal) {
+                        modal.style.display = 'block';
+                    }
+                });
+            }
         });
+    }
+    
+    // Function to toggle video display
+    function toggleGameVideo(cardId, game) {
+        const card = document.getElementById(cardId);
+        let videoContainer = card.querySelector('.game-video-container');
+        
+        if (videoContainer) {
+            // If video already exists, toggle visibility
+            videoContainer.style.display = videoContainer.style.display === 'none' ? 'block' : 'none';
+        } else {
+            // Create new video container
+            videoContainer = document.createElement('div');
+            videoContainer.classList.add('game-video-container');
+            videoContainer.innerHTML = `
+                <div class="video-wrapper">
+                    <button class="close-video">✕</button>
+                    <iframe width="100%" height="400" 
+                        src="${game.youtube}?autoplay=1" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 15px;" onclick="document.getElementById('downloadModal').style.display='block';">Download Game</button>
+            `;
+            card.appendChild(videoContainer);
+            
+            // Add close button functionality
+            const closeBtn = videoContainer.querySelector('.close-video');
+            closeBtn.addEventListener('click', () => {
+                videoContainer.style.display = 'none';
+            });
+        }
     }
 
     // -----------------------

@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XYLEX GAMING INCORPORATION | Official Documentation</title>
+    <style>
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #121212;
+            --tertiary: #1a1a1a;
+            --accent: #35df36;
+            --accent-light: #47e848;
+            --accent-dark: #11b10f;
+            --text: #ffffff;
+            --text-secondary: #b3b3b3;
+            --text-tertiary: #7a7a7a;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(53, 223, 54, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(53, 223, 54, 0.03) 0%, transparent 25%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--accent);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            max-height: 75px;
+            width: auto;
+            display: block;
+            filter: drop-shadow(0 0 15px rgba(53, 223, 54, 0.6)) drop-shadow(0 0 30px rgba(53, 223, 54, 0.3));
+            transition: all 0.3s ease;
+        }
+
+        .logo img:hover {
+            filter: drop-shadow(0 0 25px rgba(53, 223, 54, 0.8)) drop-shadow(0 0 40px rgba(53, 223, 54, 0.5));
+        }
+
+        .logo a {
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            display: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav a:hover {
+            background: rgba(53, 223, 54, 0.1);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+
+        nav a:hover::after {
+            width: 80%;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            margin: 2rem 0;
+            background: rgba(18, 18, 18, 0.7);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(53, 223, 54, 0.15);
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(53, 223, 54, 0.08) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.8rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 25px rgba(53, 223, 54, 0.4);
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            max-width: 900px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: rgba(53, 223, 54, 0.15);
+            color: var(--accent);
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            letter-spacing: 1px;
+        }
+
+        /* Documentation Grid */
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin: 4rem 0;
+        }
+
+        .doc-card {
+            background: rgba(26, 26, 26, 0.9);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            transition: var(--transition);
+            border: 1px solid rgba(53, 223, 54, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doc-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(53, 223, 54, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .doc-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-dark), var(--accent), var(--accent-light));
+        }
+
+        .doc-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.8rem;
+            background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .doc-card h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.9rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .doc-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.8rem;
+            font-size: 1.05rem;
+        }
+
+        .doc-list {
+            list-style: none;
+            padding-left: 1.2rem;
+        }
+
+        .doc-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .doc-list li::before {
+            content: '▸';
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+        }
+
+        .doc-list li:last-child {
+            border-bottom: none;
+        }
+
+        .doc-link {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .doc-link:hover {
+            border-bottom: 2px solid var(--accent);
+            padding-left: 0.5rem;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin: 5rem 0 3rem;
+            position: relative;
+        }
+
+        .section-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            display: inline-block;
+            background: linear-gradient(90deg, var(--accent-dark), var(--accent), var(--accent-light));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            padding: 0 1.5rem;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 1.5rem auto 0;
+            font-size: 1.25rem;
+            line-height: 1.7;
+        }
+
+        /* Compliance Section */
+        .compliance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .compliance-card {
+            background: rgba(30, 30, 30, 0.85);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            border-left: 4px solid var(--accent);
+            transition: var(--transition);
+        }
+
+        .compliance-card:hover {
+            background: rgba(35, 35, 35, 0.95);
+            transform: translateX(5px);
+        }
+
+        .compliance-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+        }
+
+        .compliance-card p {
+            color: var(--text-tertiary);
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .compliance-card .date {
+            color: var(--accent-light);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* API Documentation Section */
+        .api-section {
+            background: rgba(20, 20, 20, 0.8);
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            margin: 4rem 0;
+            border: 1px solid rgba(53, 223, 54, 0.15);
+        }
+
+        .endpoint-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .endpoint-card {
+            background: rgba(30, 30, 30, 0.9);
+            border-radius: 10px;
+            padding: 1.8rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .endpoint-method {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .method-get {
+            background: rgba(53, 223, 54, 0.15);
+            color: var(--accent);
+        }
+
+        .method-post {
+            background: rgba(79, 172, 255, 0.15);
+            color: #4faaff;
+        }
+
+        .endpoint-url {
+            color: #64b5f6;
+            word-break: break-all;
+        }
+
+        .endpoint-params {
+            margin-top: 1.2rem;
+            padding-left: 1.5rem;
+        }
+
+        .param {
+            margin-bottom: 0.8rem;
+        }
+
+        .param-name {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .param-type {
+            color: #ff9800;
+            margin-left: 0.5rem;
+        }
+
+        .param-desc {
+            color: var(--text-tertiary);
+            margin-left: 0.3rem;
+            font-style: italic;
+        }
+
+        /* Benefits Section */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin: 4rem 0;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .benefit-card:hover {
+            background: rgba(40, 40, 40, 0.9);
+            transform: scale(1.03);
+            border-color: rgba(53, 223, 54, 0.25);
+        }
+
+        .benefit-icon {
+            font-size: 3.2rem;
+            margin-bottom: 1.8rem;
+            background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .benefit-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            color: var(--accent);
+        }
+
+        .benefit-card p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 10, 0.98);
+            padding: 4rem 2rem 2rem;
+            margin-top: 5rem;
+            border-top: 2px solid var(--accent);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 20px rgba(53, 223, 54, 0.5);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.05rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            background: rgba(53, 223, 54, 0.1);
+        }
+
+        .copyright {
+            color: var(--text-tertiary);
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .copyright p {
+            margin-bottom: 0.5rem;
+        }
+
+        .last-updated {
+            color: var(--accent-light);
+            font-weight: bold;
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2.3rem;
+            }
+
+            .endpoint-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .hero {
+                padding: 3.5rem 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+
+            .doc-card {
+                padding: 2rem 1.8rem;
+            }
+
+            .doc-card h2 {
+                font-size: 1.7rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .api-section {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="images/Xylex logo main.png" alt="Xylex Gaming Logo">
+                        </a>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html#games"><i class="fas fa-gamepad"></i> Games</a></li>
+                        <li><a href="index.html#technology"><i class="fas fa-microchip"></i> Technology</a></li>
+                        <li><a href="company.html"><i class="fas fa-building"></i> Company</a></li>
+                        <li><a href="documentation.html"><i class="fas fa-book"></i> Documentation</a></li>
+                        <li><a href="support.html"><i class="fas fa-headset"></i> Support</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>XYLEX GAMING INCORPORATION<br>OFFICIAL DOCUMENTATION</h1>
+            <p>Comprehensive technical resources, API specifications, compliance frameworks, and developer guides for building on the XYLEX GAMING ecosystem. All documentation is maintained to enterprise standards with strict version control and security auditing.</p>
+            <div class="version-badge">VERSION 4.2.1 • LAST UPDATED: JANUARY 28, 2026</div>
+        </section>
+
+        <section class="section-header">
+            <h2>DOCUMENTATION FRAMEWORK</h2>
+            <p>XYLEX GAMING maintains a multi-tiered documentation architecture designed for developers, partners, enterprise clients, and end-users. All resources undergo quarterly security audits and compliance verification by our Cybersecurity Division.</p>
+        </section>
+
+        <div class="docs-grid">
+            <!-- Software & Technical Documentation -->
+            <div class="doc-card fade-in">
+                <div class="doc-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h2>SOFTWARE & TECHNICAL</h2>
+                <p>Complete developer resources for integrating with XYLEX platforms, engines, and services.</p>
+                <ul class="doc-list">
+                    <li>Xylex Engine SDK Integration Guide (v9.3)</li>
+                    <li>Multiplayer Networking Protocol Specification</li>
+                    <li>Cross-Platform Save System Documentation</li>
+                    <li>Anti-Cheat Implementation Manual (X-SHIELD)</li>
+                    <li>Real-time Analytics API Reference</li>
+                    <li>Modding Framework Developer Guide</li>
+                </ul>
+                <a href="/docs/technical" class="doc-link">ACCESS TECHNICAL DOCS →</a>
+            </div>
+
+            <!-- Product Documentation -->
+            <div class="doc-card fade-in">
+                <div class="doc-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h2>PRODUCT DOCUMENTATION</h2>
+                <p>Official manuals, specifications, and support resources for XYLEX gaming products and services.</p>
+                <ul class="doc-list">
+                    <li>NEXUS Gaming Console Hardware Specifications</li>
+                    <li>Xylex Cloud Gaming Client Installation Guide</li>
+                    <li>XR-7 VR Headset Calibration Manual</li>
+                    <li>Game Controller Firmware Update Procedures</li>
+                    <li>Enterprise Deployment Toolkit Documentation</li>
+                    <li>Accessibility Features Configuration Guide</li>
+                </ul>
+                <a href="/docs/products" class="doc-link">ACCESS PRODUCT DOCS →</a>
+            </div>
+
+            <!-- Knowledge Base -->
+            <div class="doc-card fade-in">
+                <div class="doc-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h2>KNOWLEDGE BASE</h2>
+                <p>Searchable self-service repository for troubleshooting, FAQs, and community-sourced solutions.</p>
+                <ul class="doc-list">
+                    <li>Account & Authentication Troubleshooting</li>
+                    <li>Network Connectivity Optimization Guide</li>
+                    <li>Performance Tuning for Low-End Hardware</li>
+                    <li>Parental Controls Configuration</li>
+                    <li>Cloud Save Recovery Procedures</li>
+                    <li>Community Moderation Guidelines & Tools</li>
+                </ul>
+                <a href="/support/kb" class="doc-link">ACCESS KNOWLEDGE BASE →</a>
+            </div>
+        </div>
+
+        <section class="section-header">
+            <h2>API DOCUMENTATION</h2>
+            <p>Enterprise-grade API specifications with full authentication workflows, rate limiting policies, and security requirements. All endpoints undergo penetration testing quarterly by our cybersecurity team.</p>
+        </section>
+
+        <div class="api-section">
+            <h2 style="font-family: 'Orbitron', sans-serif; color: var(--accent); text-align: center; margin-bottom: 2rem; font-size: 2.2rem;">CORE PLATFORM APIs</h2>
+            
+            <div class="endpoint-grid">
+                <div class="endpoint-card">
+                    <div>
+                        <span class="endpoint-method method-get">GET</span>
+                        <span class="endpoint-url">https://api.xylexgaminginc.onrender.com/v4/games/{game_id}/leaderboards</span>
+                    </div>
+                    <div class="endpoint-params">
+                        <div class="param">
+                            <span class="param-name">game_id</span>
+                            <span class="param-type">(string, required)</span>
+                            <span class="param-desc">Unique identifier for the game title</span>
+                        </div>
+                        <div class="param">
+                            <span class="param-name">season</span>
+                            <span class="param-type">(integer, optional)</span>
+                            <span class="param-desc">Competition season ID. Defaults to current season.</span>
+                        </div>
+                        <div class="param">
+                            <span class="param-name">limit</span>
+                            <span class="param-type">(integer, optional)</span>
+                            <span class="param-desc">Number of entries to return (max 100)</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px dashed rgba(255,255,255,0.1);">
+                        <strong style="color: var(--accent);">Authentication:</strong> Bearer token (OAuth 2.0)<br>
+                        <strong style="color: #ff9800;">Rate Limit:</strong> 100 requests/minute per client ID<br>
+                        <strong style="color: #f44336;">Security:</strong> TLS 1.3 required, IP whitelisting available for enterprise
+                    </div>
+                </div>
+
+                <div class="endpoint-card">
+                    <div>
+                        <span class="endpoint-method method-post">POST</span>
+                        <span class="endpoint-url">https://api.xylexgaminginc.onrender.com/v4/identity/verify-session</span>
+                    </div>
+                    <div class="endpoint-params">
+                        <div class="param">
+                            <span class="param-name">session_token</span>
+                            <span class="param-type">(string, required)</span>
+                            <span class="param-desc">Active player session token</span>
+                        </div>
+                        <div class="param">
+                            <span class="param-name">device_fingerprint</span>
+                            <span class="param-type">(string, required)</span>
+                            <span class="param-desc">SHA-256 hash of device characteristics</span>
+                        </div>
+                        <div class="param">
+                            <span class="param-name">geolocation</span>
+                            <span class="param-type">(object, optional)</span>
+                            <span class="param-desc">Player's current coordinates for fraud detection</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px dashed rgba(255,255,255,0.1);">
+                        <strong style="color: var(--accent);">Authentication:</strong> API key + HMAC signature<br>
+                        <strong style="color: #ff9800;">Rate Limit:</strong> 50 requests/minute per API key<br>
+                        <strong style="color: #f44336;">Security:</strong> Mandatory request signing, replay attack protection
+                    </div>
+                </div>
+
+                <div class="endpoint-card">
+                    <div>
+                        <span class="endpoint-method method-get">GET</span>
+                        <span class="endpoint-url">https://api.xylexgaminginc.onrender.com/v4/telemetry/metrics</span>
+                    </div>
+                    <div class="endpoint-params">
+                        <div class="param">
+                            <span class="param-name">start_time</span>
+                            <span class="param-type">(timestamp, required)</span>
+                            <span class="param-desc">ISO 8601 start time (UTC)</span>
+                        </div>
+                        <div class="param">
+                            <span class="param-name">end_time</span>
+                            <span class="param-type">(timestamp, required)</span>
+                            <span class="param-desc">ISO 8601 end time (UTC)</span>
+                        </div>
+                        <div class="param">
+                            <span class="param-name">metrics</span>
+                            <span class="param-type">(array, required)</span>
+                            <span class="param-desc">Array of metric identifiers (fps, latency, memory_usage)</span>
+                        </div>
+                        <div class="param">
+                            <span class="param-name">segment</span>
+                            <span class="param-type">(string, optional)</span>
+                            <span class="param-desc">Player segment filter (new_players, whales, etc.)</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px dashed rgba(255,255,255,0.1);">
+                        <strong style="color: var(--accent);">Authentication:</strong> Enterprise API key only<br>
+                        <strong style="color: #ff9800;">Rate Limit:</strong> 20 requests/hour (data-intensive endpoint)<br>
+                        <strong style="color: #f44336;">Security:</strong> GDPR-compliant anonymization, PII filtering enforced
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(53,223,54,0.2);">
+                <a href="/docs/api" class="doc-link" style="font-size: 1.2rem; padding: 0.8rem 2rem; background: rgba(53,223,54,0.15); border-radius: 8px; display: inline-block;">
+                    VIEW FULL API REFERENCE →
+                </a>
+                <p style="color: var(--text-tertiary); margin-top: 1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    All API traffic is logged and monitored by our Security Operations Center (SOC). Suspicious activity triggers automatic rate limiting and account review per Section 7.3 of our Developer Agreement.
+                </p>
+            </div>
+        </div>
+
+        <section class="section-header">
+            <h2>COMPLIANCE & LEGAL FRAMEWORK</h2>
+            <p>XYLEX GAMING maintains strict adherence to global regulatory standards with documentation audited quarterly by third-party compliance firms. All policies undergo legal review before publication.</p>
+        </section>
+
+        <div class="compliance-grid">
+            <div class="compliance-card">
+                <h3>PRIVACY POLICY</h3>
+                <p>Comprehensive data handling procedures compliant with GDPR, CCPA, LGPD, and POPIA. Details data collection purposes, retention periods, and user rights exercise mechanisms.</p>
+                <div class="date">Last Updated: December 15, 2025</div>
+                <div class="date">Next Audit: March 20, 2026</div>
+            </div>
+            
+            <div class="compliance-card">
+                <h3>TERMS OF SERVICE</h3>
+                <p>Binding legal agreement covering account usage, intellectual property rights, prohibited conduct, dispute resolution procedures, and jurisdiction specifications for 195 countries.</p>
+                <div class="date">Last Updated: November 3, 2025</div>
+                <div class="date">Enforcement Date: January 1, 2026</div>
+            </div>
+            
+            <div class="compliance-card">
+                <h3>COPPA COMPLIANCE</h3>
+                <p>Children's Online Privacy Protection Act implementation framework including age gating systems, parental consent workflows, and data minimization protocols for users under 13.</p>
+                <div class="date">Last Updated: October 28, 2025</div>
+                <div class="date">Certified By: kidSAFE Seal Program</div>
+            </div>
+            
+            <div class="compliance-card">
+                <h3>GDPR DATA PROCESSING</h3>
+                <p>Article 28-compliant Data Processing Addendum (DPA) with Standard Contractual Clauses (SCCs) for international data transfers. Includes DPO contact information and breach notification procedures.</p>
+                <div class="date">Last Updated: January 5, 2026</div>
+                <div class="date">DPA Version: 4.1</div>
+            </div>
+            
+            <div class="compliance-card">
+                <h3>SECURITY WHITEPAPER</h3>
+                <p>Technical deep-dive into XYLEX security architecture including X-SHIELD anti-cheat, DDoS mitigation systems, cryptographic key management, and penetration testing methodologies.</p>
+                <div class="date">Last Updated: January 22, 2026</div>
+                <div class="date">Classification: PUBLIC (Redacted)</div>
+            </div>
+            
+            <div class="compliance-card">
+                <h3>ACCESSIBILITY STATEMENT</h3>
+                <p>WCAG 2.1 AA compliance roadmap with current conformance status per platform. Includes VPAT documentation and timeline for remaining accessibility gaps remediation.</p>
+                <div class="date">Last Updated: December 10, 2025</div>
+                <div class="date">Target Conformance: WCAG 2.2 AA by Q3 2026</div>
+            </div>
+        </div>
+
+        <section class="section-header">
+            <h2>PURPOSE & STRATEGIC BENEFITS</h2>
+            <p>Our documentation ecosystem transforms internal expertise into structured, auditable knowledge assets that drive business value while reducing operational risk.</p>
+        </section>
+
+        <div class="benefits-grid">
+            <div class="benefit-card fade-in">
+                <div class="benefit-icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h3>SELF-SERVICE SUPPORT</h3>
+                <p>Reduces support ticket volume by 68% through comprehensive troubleshooting guides and interactive diagnostics tools. Enterprise clients receive dedicated documentation portals with SLA-backed response times.</p>
+            </div>
+            
+            <div class="benefit-card fade-in">
+                <div class="benefit-icon">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h3>REGULATORY COMPLIANCE</h3>
+                <p>Automated documentation versioning with cryptographic signing ensures audit trails for GDPR, CCPA, and financial regulations. All changes require dual approval from Legal and Security teams before publication.</p>
+            </div>
+            
+            <div class="benefit-card fade-in">
+                <div class="benefit-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3>DEVELOPER VELOCITY</h3>
+                <p>Reduces third-party integration timelines by 47% through interactive API consoles, SDK sandboxes, and real-time validation tools. Includes automated security scanning for partner integrations pre-launch.</p>
+            </div>
+            
+            <div class="benefit-card fade-in">
+                <div class="benefit-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>SECURITY BY DESIGN</h3>
+                <p>All documentation undergoes threat modeling review by our cybersecurity division. Sensitive implementation details are redacted or access-controlled. Public docs contain deliberate misinformation to mislead attackers.</p>
+            </div>
+            
+            <div class="benefit-card fade-in">
+                <div class="benefit-icon">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <h3>VERSION INTEGRITY</h3>
+                <p>Git-based documentation pipeline with semantic versioning. Every change triggers automated tests against live APIs. Rollback capability to any historical version within 15 seconds during incident response.</p>
+            </div>
+            
+            <div class="benefit-card fade-in">
+                <div class="benefit-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3>GLOBAL ACCESSIBILITY</h3>
+                <p>Documentation available in 28 languages with region-specific compliance variants. All content undergoes cultural sensitivity review by native speakers. Offline PDF exports available for air-gapped environments.</p>
+            </div>
+        </div>
+
+        <div style="background: rgba(30, 30, 30, 0.85); border-radius: var(--border-radius); padding: 2.5rem; margin: 4rem 0; border: 1px solid rgba(53, 223, 54, 0.2);">
+            <h2 style="font-family: 'Orbitron', sans-serif; text-align: center; margin-bottom: 1.5rem; font-size: 2.3rem; background: linear-gradient(90deg, var(--accent-dark), var(--accent)); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                DOCUMENTATION GOVERNANCE POLICY
+            </h2>
+            <p style="text-align: center; max-width: 900px; margin: 0 auto 2rem; color: var(--text-secondary); line-height: 1.8; font-size: 1.1rem;">
+                All XYLEX GAMING documentation is maintained under strict governance protocols:<br><br>
+                • <strong>Ownership:</strong> Each document has a designated Document Owner from Engineering, Legal, or Security teams<br>
+                • <strong>Review Cycle:</strong> Technical docs reviewed quarterly; Compliance docs reviewed monthly<br>
+                • <strong>Change Control:</strong> All modifications require Jira ticket approval with security impact assessment<br>
+                • <strong>Access Tiers:</strong> Public (green), Partner (yellow), Internal (red), Restricted (black)<br>
+                • <strong>Breach Protocol:</strong> Unauthorized documentation access triggers SOC Level 1 incident response<br>
+                • <strong>Retention:</strong> All versions archived for 7 years in write-once-read-many (WORM) storage<br>
+            </p>
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <span style="background: rgba(53, 223, 54, 0.15); color: var(--accent); padding: 0.4rem 1.5rem; border-radius: 30px; font-weight: bold; letter-spacing: 1px; display: inline-block;">
+                    DOCUMENTATION SECURITY CLASSIFICATION: GREEN (PUBLIC)
+                </span>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">XYLEX GAMING INCORPORATION</div>
+                <p style="color: var(--text-secondary); max-width: 700px; margin: 0 auto 2rem; line-height: 1.7;">
+                    Building the future of interactive entertainment through cutting-edge technology and uncompromising security standards. All documentation is property of XYLEX GAMING INCORPORATION and protected under international copyright law.
+                </p>
+                
+                <div class="footer-links">
+                    <a href="/docs/technical"><i class="fas fa-code"></i> Technical Docs</a>
+                    <a href="/docs/api"><i class="fas fa-plug"></i> API Reference</a>
+                    <a href="/compliance"><i class="fas fa-balance-scale"></i> Compliance</a>
+                    <a href="/security"><i class="fas fa-shield-alt"></i> Security</a>
+                    <a href="/legal"><i class="fas fa-gavel"></i> Legal</a>
+                    <a href="/support"><i class="fas fa-headset"></i> Support</a>
+                </div>
+                
+                <div class="copyright">
+                    <p>© 2026 XYLEX GAMING INCORPORATION. All rights reserved.</p>
+                    <p>Headquarters: Gwarinpa District, Abuja, Nigeria • Global Operations Center: Singapore • R&D Hub: Berlin</p>
+                    <p>Documentation Version: 4.2.1 • Security Hash: SHA3-256:a1b2c3d4e5f6...</p>
+                    <span class="last-updated">Last Documentation Security Audit: January 27, 2026 by XYLEX Cybersecurity Division</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Fade-in animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('appear');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Security notice for documentation access
+            console.log('%cXYLEX GAMING DOCUMENTATION SYSTEM', 'color: #35df36; font-size: 24px; font-weight: bold; text-shadow: 0 0 10px rgba(53,223,54,0.7);');
+            console.log('%cSECURITY NOTICE: Unauthorized access, modification, or distribution of this documentation violates XYLEX GAMING Terms of Service and may constitute criminal offense under CFAA and GDPR Article 83.', 'color: #ff4d4d; font-weight: bold; background: rgba(255,0,0,0.1); padding: 10px; border-radius: 5px;');
+            console.log('%cDocumentation Version: 4.2.1 • Security Hash: SHA3-256:a1b2c3d4e5f67890...', 'color: #35df36;');
+            console.log('%cAll access attempts are logged and monitored by XYLEX Security Operations Center (SOC)', 'color: #b3b3b3; font-style: italic;');
+        });
+    </script>
+</body>
+</html>

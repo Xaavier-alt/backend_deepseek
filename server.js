@@ -131,6 +131,7 @@ if (!process.env.DISCORD_CLIENT_ID || !process.env.DISCORD_CLIENT_SECRET) {
 // JSON parsing & static assets
 // ---------------------
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 // ---------------------

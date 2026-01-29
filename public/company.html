@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Profile - Xylex Gaming</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
+
+        :root {
+            --primary: #121212;
+            --secondary: #1a1a1a;
+            --accent: #35df36;
+            --accent-light: #35df36;
+            --accent-dark: #11b10f;
+            --text: #ffffff;
+            --text-secondary: #b3b3b3;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+        
+        nav {
+            background: var(--secondary);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent);
+            box-shadow: 0 0 20px rgba(53, 223, 54, 0.25);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo img {
+            max-height: 75px;
+            width: auto;
+            display: block;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #e0e0ff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-links a i {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-links a::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: var(--text);
+            padding: 0.5rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(53, 223, 54, 0.12);
+            transform: translateY(-2px);
+        }
+        
+        .nav-links a:hover i {
+            transform: scale(1.2);
+            color: var(--accent);
+        }
+        
+        .nav-links a:hover::after {
+            opacity: 1;
+            bottom: -40px;
+        }
+        
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/gamers_background.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-blend-mode: darken;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(53, 223, 54, 0.06) 0%, transparent 70%);
+            animation: pulse 4s infinite;
+            filter: blur(3px);
+            z-index: 1;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(53, 223, 54, 0.6), 0 0 30px rgba(53, 223, 54, 0.4);
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(53, 223, 54, 0.35);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(53, 223, 54, 0.55);
+        }
+        
+        .cta-button:active {
+            transform: translateY(1px);
+        }
+        
+        section {
+            padding: 5rem 10%;
+            scroll-margin-top: 80px;
+        }
+        
+        section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background-clip: text;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .about-text {
+            width: 100%;
+            max-width: 900px;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .company-image {
+            width: 300px;
+            height: 300px;
+            background: rgba(20, 15, 50, 0.5);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 40px rgba(53, 223, 54, 0.6), 0 0 60px rgba(53, 223, 54, 0.3), inset 0 0 30px rgba(53, 223, 54, 0.2);
+            transition: all 0.3s ease;
+            padding: 2rem;
+        }
+        
+        .company-image img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 20px rgba(53, 223, 54, 0.8)) drop-shadow(0 0 40px rgba(53, 223, 54, 0.4));
+        }
+        
+        .company-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .team-member {
+            background: rgba(30, 25, 60, 0.8);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(53, 223, 54, 0.06), rgba(17, 177, 15, 0.06));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(53, 223, 54, 0.25);
+        }
+        
+        .team-member:hover::before {
+            opacity: 1;
+        }
+        
+        .member-image {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+        
+        .team-member:hover .member-image {
+            transform: scale(1.1);
+        }
+        
+        .member-name {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        .member-role {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        
+        .member-desc {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .contact-info {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .contact-info p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+        
+        .contact-links {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .contact-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(53, 223, 54, 0.4);
+        }
+        
+        footer {
+            background: var(--secondary);
+            padding: 3rem;
+            text-align: center;
+            border-top: 2px solid var(--accent);
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(53, 223, 54, 0.1);
+            border-radius: 50%;
+            color: var(--accent);
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--text);
+            transform: translateY(-3px);
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 3rem 5%;
+            }
+            
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+            }
+            
+            .contact-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="images/Xylex logo main.png" alt="Xylex Gaming Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#team" data-tooltip="Team"><i class="fas fa-people-group"></i></a></li>
+            <li><a href="#contact" data-tooltip="Contact"><i class="fas fa-envelope"></i></a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>XYLEX GAMING INCORPORATIONS: THE NEXT GENERATION OF GAMING</h1>
+            <p>Xylex Gaming: Engineering imagination. Powering play.</p>
+            <button class="cta-button" onclick="window.location.href='index.html#games'">Explore More</button>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>ABOUT US</h2>
+        <div class="about-content">
+            <div class="company-image">
+                <img src="images/Xylex logo main.png" alt="Xylex Gaming Logo">
+            </div>
+            <div class="about-text">
+               <p>
+            <strong>XYLEX GAMING INCORPORATIONS</strong> stands as the nexus of innovation and interactive excellence. 
+            We are architects of immersive worlds, engineers of boundless imagination, and pioneers in cutting-edge 
+            game development. Our mission transcends traditional gaming—we craft experiences that redefine entertainment, 
+            push technological boundaries, and unite global communities through shared digital adventures.
+        </p>
+
+        <p>
+            Every title bearing the XYLEX name represents our unwavering commitment to <strong>Excellence in Design</strong>. 
+            From breathtaking visuals powered by next-generation engines to gameplay mechanics that captivate millions, 
+            we blend art and science to create unforgettable moments. Our studios collaborate across continents, 
+            bringing diverse talents and perspectives to forge gaming experiences that inspire and transform.
+        </p>
+
+        <p>
+            At XYLEX, we believe in the <strong>Power of Creation</strong>. We harness cutting-edge technologies—from 
+            advanced AI systems to real-time ray tracing—to deliver seamless performance across all platforms. Innovation 
+            flows through our DNA; we don't follow trends, we set them. Our proprietary tools and frameworks enable teams 
+            to work at peak efficiency while maintaining the creative freedom that birthed legendary titles.
+        </p>
+
+        <p>
+            Our community is our greatest asset. Players worldwide connect through our games, forming bonds, competing, 
+            creating, and celebrating together. XYLEX Gaming is more than a studio—it's a movement. We're dedicated to 
+            fostering a culture of inclusivity, innovation, and inspiration, where dreams become digital reality and 
+            play becomes a way of life.
+        </p>
+
+        <p>
+            <strong>The future of gaming is here. The future is XYLEX.</strong>
+        </p>
+    </div>
+        </div>
+    </section>
+
+    <section id="team" style="background: rgba(20, 15, 50, 0.3);">
+        <h2>OUR TEAM</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-image">CEO IMAGE</div>
+                <h3 class="member-name">Joe-Ugwu Fortune</h3>
+                <p class="member-role">Chief Executive Officer</p>
+                <p class="member-desc">Visionary leader with 5+ years in the gaming industry. Formerly led development at major studios before founding XYLEX GAMING.</p>
+            </div>
+            
+            <div class="team-member">
+                <div class="member-image">CTO IMAGE</div>
+                <h3 class="member-name">Sophia Chen</h3>
+                <p class="member-role">Chief Technology Officer</p>
+                <p class="member-desc">Pioneer in game engine development and real-time rendering. Holds multiple patents in graphics optimization and AI integration.</p>
+            </div>
+            
+            <div class="team-member">
+                <div class="member-image">ART DIRECTOR IMAGE</div>
+                <h3 class="member-name">Marcus Rivera</h3>
+                <p class="member-role">Art Director</p>
+                <p class="member-desc">Award-winning artist specializing in character design and world-building. Brings over a decade of experience in AAA game art direction.</p>
+            </div>
+            
+            <div class="team-member">
+                <div class="member-image">GAME DIRECTOR IMAGE</div>
+                <h3 class="member-name">Elena Petrova</h3>
+                <p class="member-role">Game Director</p>
+                <p class="member-desc">Master storyteller and gameplay architect. Known for creating emotionally resonant narratives and innovative game mechanics.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>CONTACT US</h2>
+        <div class="contact-info">
+            <p><strong>Email:</strong> xylexgaminginc@gmail.com</p>
+            <p><strong>Phone:</strong> (234) 808-677-6186</p>
+            <p><strong>Address:</strong> Gwarinpa, Abuja</p>
+            <p><strong>Website:</strong> www.xylexgaminginc.onrender.com</p>
+            
+            <div class="contact-links">
+                <a href="mailto:xylexgaminginc@gmail.com" class="contact-btn">Send Email</a>
+                <a href="tel:+234808677616" class="contact-btn">Call Us</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 XYLEX GAMING INC. All rights reserved.</p>
+        <div class="social-links">
+            <a href="https://x.com/Xylexgaminginc" target="_blank" rel="noopener noreferrer" title="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://web.facebook.com/profile.php?id=61579842392872" target="_blank" rel="noopener noreferrer" title="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/xylexgaming/" target="_blank" rel="noopener noreferrer" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://youtube.com/xylexgaming" target="_blank" rel="noopener noreferrer" title="YouTube">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://discord.gg/xylexgaming" target="_blank" rel="noopener noreferrer" title="Discord">
+                <i class="fab fa-discord"></i>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

@@ -78,6 +78,12 @@
             max-height: 100px;
             width: auto;
             display: block;
+            filter: drop-shadow(0 0 15px rgba(53, 223, 54, 0.6)) drop-shadow(0 0 30px rgba(53, 223, 54, 0.3));
+            transition: all 0.3s ease;
+        }
+
+        .logo img:hover {
+            filter: drop-shadow(0 0 25px rgba(53, 223, 54, 0.8)) drop-shadow(0 0 40px rgba(53, 223, 54, 0.5));
         }
 
         .logo-short {
@@ -183,6 +189,8 @@
             font-size: 4rem;
             margin-bottom: 20px;
             line-height: 1.2;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(53, 223, 54, 0.8), 0 0 40px rgba(53, 223, 54, 0.5), 0 0 60px rgba(53, 223, 54, 0.3);
         }
 
         .hero p {
@@ -260,9 +268,70 @@
 
         .game-content p {
             color: var(--text-secondary);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
-/* Technology */
+
+        .game-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .download-icon-btn {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: auto;
+        }
+
+        .download-icon-btn:hover {
+            background-color: rgba(53, 223, 54, 0.1);
+            box-shadow: 0 0 15px rgba(53, 223, 54, 0.5);
+        }
+
+        .game-video-container {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 2px solid var(--accent);
+            margin-top: 10px;
+            border-radius: 8px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .close-video {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent);
+            color: var(--text);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s;
+        }
+        .close-video:hover {
+            background: var(--accent-dark);
+            transform: scale(1.1);
+        }
+
+        /* Technology */
 .technology {
     padding: 100px 0;
     background-color: var(--primary);
@@ -307,6 +376,13 @@
 .tech-icon i {
     font-size: 3rem;
     color: var(--accent);
+    filter: drop-shadow(0 0 15px rgba(53, 223, 54, 0.8)) drop-shadow(0 0 30px rgba(53, 223, 54, 0.4));
+    transition: all 0.3s ease;
+}
+
+.tech-icon i:hover {
+    filter: drop-shadow(0 0 25px rgba(53, 223, 54, 1)) drop-shadow(0 0 40px rgba(53, 223, 54, 0.6));
+    transform: scale(1.1);
 }
 
 .tech-icon img {
@@ -315,7 +391,19 @@
     image-rendering: -webkit-optimize-contrast;
 }
 
-/* Footer */
+.tech-icon img[src*="unreal"] {
+    width: 4rem;
+    height: 4rem;
+    filter: drop-shadow(0 0 20px rgba(53, 223, 54, 0.8)) drop-shadow(0 0 35px rgba(53, 223, 54, 0.4));
+    transition: all 0.3s ease;
+}
+
+.tech-icon img[src*="unreal"]:hover {
+    filter: drop-shadow(0 0 30px rgba(53, 223, 54, 1)) drop-shadow(0 0 45px rgba(53, 223, 54, 0.6));
+    transform: scale(1.1);
+}
+
+        /* Footer */
         footer {
             background-color: #0a0a0a;
             padding: 60px 0 30px;
@@ -487,48 +575,58 @@
         }
 
         .btn-google {
-            background:#35df36; /* Google Blue — button background */
-            color: white;              /* White text for contrast */
-            border: none;
-            padding: 10px;
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            padding: 10px 20px;
             border-radius: 5px;
             font-weight: 500;
             cursor: pointer;
             display: flex;
             align-items: center;
-            width: 100%;
             justify-content: center;
+            gap: 10px;
+            width: 100%;
             text-decoration: none;
+            transition: all 0.3s ease;
         }
 
-        .btn-google i,
-        .btn-google svg {
-            background-color: #DB4437; /* Google Red — for the icon */
+        .btn-google i {
             font-size: 18px;
+            filter: drop-shadow(0 0 8px rgba(53, 223, 54, 0.6));
         }
 
         .btn-google:hover {
-            background-color: #3367D6; /* Slightly darker blue on hover */
+            background-color: rgba(53, 223, 54, 0.1);
+            box-shadow: 0 0 15px rgba(53, 223, 54, 0.5);
         }
 
         .btn-discord {
-            background:#35df36;
-            color:  #5865f2;
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
             font-weight: 500;
             width: 100%;
-            padding: 10px;
+            padding: 10px 20px;
             border-radius: 5px;
             margin: 5px 0;
             cursor: pointer;
-            border: none;
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 10px;
             text-decoration: none;
+            transition: all 0.3s ease;
         }
 
         .btn-discord i {
-            margin-right: 8px;
+            font-size: 18px;
+            filter: drop-shadow(0 0 8px rgba(53, 223, 54, 0.6));
+        }
+
+        .btn-discord:hover {
+            background-color: rgba(53, 223, 54, 0.1);
+            box-shadow: 0 0 15px rgba(53, 223, 54, 0.5);
         }
 
         .social-signup {
@@ -685,7 +783,7 @@
             <!-- Fallback content in case JavaScript doesn't load -->
             <div class="tech-card">
                 <div class="tech-icon"><i class="fas fa-brain"></i></div>
-                <h3>XGI AI Systems</h3>
+                <h3>NVIDIA AI Systems</h3>
                 <p>Next-generation AI that creates dynamic, responsive gameplay experiences.</p>
             </div>
             <div class="tech-card">
@@ -695,7 +793,7 @@
             </div>
             <div class="tech-card">
                 <div class="tech-icon">
-                    <img src="images/unreal_engine_logo.png" alt="Unreal Engine Logo">
+                    <img src="images/unreal_engine_green.png" alt="Unreal Engine Logo">
                 </div>
                 <h3>Unreal Engine</h3>
                 <p>Unreal game engine powering photorealistic graphics and massive open worlds.</p>
@@ -732,24 +830,24 @@
                 <div class="footer-column">
                     <h3>Company</h3>
                     <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">News</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="company.html">About</a></li>
+                        <li><a href="jobs.html">Careers</a></li>
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="support.html">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Support</h3>
                     <ul>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Community</a></li>
-                        <li><a href="#">Forums</a></li>
-                        <li><a href="#">Documentation</a></li>
+                        <li><a href="support.html">Help Center</a></li>
+                        <li><a href="support.html">Community</a></li>
+                        <li><a href="support.html">Forums</a></li>
+                        <li><a href="documentation.html">Documentation</a></li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2024 Xylex Gaming Technologies, Inc. All rights reserved.</p>
+                <p>&copy; 2026 Xylex Gaming Technologies, Inc. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -776,17 +874,17 @@
             </div>
             
             <div class="social-signup">
-                <button onclick="window.location.href='/auth/google'" class="btn btn-google">
+                <button onclick="window.location.href='https://accounts.google.com/signin'; return false;" class="btn btn-google">
                     <i class="fab fa-google"></i> Sign in with Google
                 </button>
-                <button onclick="window.location.href='/auth/discord'" class="btn btn-discord">
+                <button onclick="window.location.href='https://discord.com/login'; return false;" class="btn btn-discord">
                     <i class="fab fa-discord"></i> Sign in with Discord
                 </button>
             </div>
             
             <p style="margin-top: 15px; text-align: center;">
                 Don't have an account? 
-                <a href="#" id="openSignUp">Sign Up</a>
+                <a href="#" id="openSignUp" style="color: var(--accent); cursor: pointer;">Sign Up</a>
             </p>
         </div>
     </div>
@@ -798,10 +896,10 @@
             <h2>Create Account</h2>
             
             <div class="social-signup">
-                <button onclick="window.location.href='/auth/google'" class="btn btn-google">
+                <button onclick="window.location.href='https://accounts.google.com/signup'" class="btn btn-google">
                     <i class="fab fa-google"></i> Sign up with Google
                 </button>
-                <button onclick="window.location.href='/auth/discord'" class="btn btn-discord">
+                <button onclick="window.location.href='https://discord.com/register'" class="btn btn-discord">
                     <i class="fab fa-discord"></i> Sign up with Discord
                 </button>
             </div>
